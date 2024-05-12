@@ -10,8 +10,7 @@ export default function MainLayout(props: React.PropsWithChildren<PropType>) {
   }, []);
 
   return (
-    <div>
-      <div>This is the layout</div>
+    <div className="mx-auto container flex flex-col items-center border-2 border-black dark:border-white rounded-lg m-4 h-full w-max box-border">
       {props.children}
     </div>
   );
