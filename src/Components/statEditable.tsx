@@ -1,12 +1,11 @@
 import React from "react";
-import { rollD10 } from "../Utils";
+import { rollD10 } from "../Utils/functions";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setSave, setStat } from "../store/slices/newCharacterSlice";
 import Button from "./button";
 
 interface PropType {
   name: string;
-  text: string;
   type: "stat" | "save";
 }
 
@@ -49,7 +48,7 @@ export default function StatEditable(props: PropType) {
           onChange={onChange}
         />
       </div>
-      <div className="font-bold uppercase text-lg">{props.text}</div>
+      <div className="font-bold uppercase text-lg">{props.name}</div>
       <Button type="button" onClick={onClick}>
         Roll
       </Button>
