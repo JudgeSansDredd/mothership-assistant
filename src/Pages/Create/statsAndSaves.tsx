@@ -1,11 +1,11 @@
 import React from "react";
-import Button from "../Components/button";
-import StatEditable from "../Components/statEditable";
-import TextInput from "../Components/textInput";
-import MainLayout from "../Layouts/mainLayout";
-import { rollD10 } from "../Utils";
-import { useAppDispatch } from "../store/hooks";
-import { setSaves, setStats } from "../store/slices/newCharacterSlice";
+import Button from "../../Components/button";
+import StatEditable from "../../Components/statEditable";
+import TextInput from "../../Components/textInput";
+import MainLayout from "../../Layouts/mainLayout";
+import { rollD10 } from "../../Utils";
+import { useAppDispatch } from "../../store/hooks";
+import { setSaves, setStats } from "../../store/slices/newCharacterSlice";
 
 export default function Create() {
   const dispatch = useAppDispatch();

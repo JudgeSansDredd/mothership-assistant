@@ -1,13 +1,13 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import Create from "../Pages/create";
+import StatsAndSaves from "../Pages/Create/StatsAndSaves";
 import Welcome from "../Pages/welcome";
 
 const routesFn = () => {
   return (
     <>
       <Route path="/" element={<Welcome />} />
-      <Route path="/create" element={<Create />} />
+      <Route path="/create" element={<StatsAndSaves />} />
     </>
   );
 };
