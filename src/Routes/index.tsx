@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import StatsAndSaves from "../Pages/Create/StatsAndSaves";
+import StatsAndSaves from "../Pages/Create/statsAndSaves";
 import Welcome from "../Pages/welcome";
 
 const routesFn = () => {
