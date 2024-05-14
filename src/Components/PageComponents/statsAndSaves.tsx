@@ -1,12 +1,10 @@
 import React from "react";
-import Button from "../../Components/button";
-import ButtonLink from "../../Components/buttonLink";
-import StatEditable from "../../Components/statEditable";
-import TextInput from "../../Components/textInput";
-import MainLayout from "../../Layouts/mainLayout";
+import { setSaves, setStats } from "../../Store/Slices/newCharacterSlice";
+import { useAppDispatch } from "../../Store/hooks";
 import { rollD10 } from "../../Utils/functions";
-import { useAppDispatch } from "../../store/hooks";
-import { setSaves, setStats } from "../../store/slices/newCharacterSlice";
+import Button from "../button";
+import StatEditable from "../statEditable";
+import TextInput from "../textInput";
 
 export default function StatsAndSaves() {
   const dispatch = useAppDispatch();
@@ -33,8 +31,7 @@ export default function StatsAndSaves() {
   };
 
   return (
-    <MainLayout title="Create">
-      <h1 className="text-2xl">Create a Character</h1>
+    <>
       <div className="grid gap-6 mb-6 md:grid-cols-2">
         <div>
           <label
@@ -67,7 +64,10 @@ export default function StatsAndSaves() {
           placeholder="32 years old, loves cats and hates coffee"
         />
       </div>
-      <div className="text-2xl w-full text-center mb-2">Stats</div>
+      <div className="text-2xl w-full text-center">Stats</div>
+      <div className="text-sm w-full text-center mb-2 italic">
+        Roll 2d10 + 25
+      </div>
       <div className="grid gap-6 mb-6 md:grid-cols-4">
         <StatEditable type="stat" name="strength" />
         <StatEditable type="stat" name="speed" />
@@ -79,7 +79,10 @@ export default function StatsAndSaves() {
           Roll All
         </Button>
       </div>
-      <div className="text-2xl w-full text-center mb-2">Saves</div>
+      <div className="text-2xl w-full text-center">Saves</div>
+      <div className="text-sm w-full text-center mb-2 italic">
+        Roll 2d10 + 10
+      </div>
       <div className="grid gap-6 mb-6 md:grid-cols-3">
         <StatEditable type="save" name="sanity" />
         <StatEditable type="save" name="fear" />
@@ -90,7 +93,6 @@ export default function StatsAndSaves() {
           Roll All
         </Button>
       </div>
-      <ButtonLink to="/create/characterclass">Next</ButtonLink>
-    </MainLayout>
+    </>
   );
 }

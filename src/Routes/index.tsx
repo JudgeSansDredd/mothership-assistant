@@ -1,15 +1,13 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import CharacterClass from "../Pages/Create/characterClass";
-import StatsAndSaves from "../Pages/Create/statsAndSaves";
+import CreateCharacter from "../Pages/createCharacter";
 import Welcome from "../Pages/welcome";
 
 const routesFn = () => {
   return (
     <>
       <Route path="/" element={<Welcome />} />
-      <Route path="/create/statsandsaves" element={<StatsAndSaves />} />
-      <Route path="/create/characterclass" element={<CharacterClass />} />
+      <Route path="/create" element={<CreateCharacter />} />
     </>
   );
 };

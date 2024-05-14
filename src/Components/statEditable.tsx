@@ -1,7 +1,7 @@
 import React from "react";
+import { setSave, setStat } from "../Store/Slices/newCharacterSlice";
+import { useAppDispatch, useAppSelector } from "../Store/hooks";
 import { rollD10 } from "../Utils/functions";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setSave, setStat } from "../store/slices/newCharacterSlice";
 import Button from "./button";
 
 interface PropType {
@@ -19,6 +19,7 @@ export default function StatEditable(props: PropType) {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const parsedValue = parseInt(e.target.value);
     const value = isNaN(parsedValue) ? undefined : parsedValue;
+    if (value && (value < 0 || value > 99)) return;
     const action =
       props.type === "stat"
         ? setStat({ stat: props.name, value })
