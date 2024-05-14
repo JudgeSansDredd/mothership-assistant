@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { SaveType, StatType } from "../../Utils/types";
+import { SaveArrayType, StatArrayType } from "../../Utils/types";
 
 interface newCharacterSliceStateType {
-  stats: Record<StatType, number | undefined>;
-  saves: Record<SaveType, number | undefined>;
+  stats: StatArrayType;
+  saves: SaveArrayType;
 }
 
 const initialState: newCharacterSliceStateType = {
