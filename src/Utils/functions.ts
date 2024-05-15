@@ -10,13 +10,19 @@ export const useTransitionClasses = (page: number) => {
     "transition duration-300"
   );
   useEffect(() => {
-    const left = currentPage > page;
-    const right = currentPage < page;
-    let newTransitionClasses = "transition duration-300";
-    if (left) {
-      newTransitionClasses += " -translate-x-full";
-    } else if (right) {
-      newTransitionClasses += " translate-x-full";
+    const visible = currentPage === page;
+    // const left = currentPage > page;
+    // const right = currentPage < page;
+    let newTransitionClasses = "transition-all duration-300";
+    // if (left) {
+    //   newTransitionClasses += " -translate-x-full";
+    // } else if (right) {
+    //   newTransitionClasses += " translate-x-full";
+    // }
+    if (visible) {
+      newTransitionClasses += " w-full h-full";
+    } else {
+      newTransitionClasses += " w-0 overflow-hidden";
     }
     setTransitionClasses(newTransitionClasses);
   }, [currentPage, page]);
