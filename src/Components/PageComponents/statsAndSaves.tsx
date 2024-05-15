@@ -73,14 +73,14 @@ export default function StatsAndSaves() {
       <div className="text-sm w-full text-center mb-2 italic">
         Roll 2d10 + 25
       </div>
-      <div className="grid gap-6 mb-6 md:grid-cols-4">
-        <StatEditable type="stat" name="strength" />
-        <StatEditable type="stat" name="speed" />
-        <StatEditable type="stat" name="intellect" />
-        <StatEditable type="stat" name="combat" />
-      </div>
-      <div className="mb-6 w-full">
-        <Button type="button" onClick={onStatRandomizeAll} className="w-full">
+      <div className="mb-6 w-max flex flex-col justify-center">
+        <div className="grid gap-6 mb-6 md:grid-cols-4">
+          <StatEditable type="stat" name="strength" />
+          <StatEditable type="stat" name="speed" />
+          <StatEditable type="stat" name="intellect" />
+          <StatEditable type="stat" name="combat" />
+        </div>
+        <Button type="button" onClick={onStatRandomizeAll} className="px-12">
           Roll
         </Button>
       </div>
@@ -88,13 +88,13 @@ export default function StatsAndSaves() {
       <div className="text-sm w-full text-center mb-2 italic">
         Roll 2d10 + 10
       </div>
-      <div className="grid gap-6 mb-6 md:grid-cols-3">
-        <StatEditable type="save" name="sanity" />
-        <StatEditable type="save" name="fear" />
-        <StatEditable type="save" name="body" />
-      </div>
-      <div className="mb-6 w-full">
-        <Button type="button" onClick={onSaveRandomizeAll} className="w-full">
+      <div className="mb-6 w-max flex flex-col justify-center">
+        <div className="grid gap-6 mb-6 md:grid-cols-3">
+          <StatEditable type="save" name="sanity" />
+          <StatEditable type="save" name="fear" />
+          <StatEditable type="save" name="body" />
+        </div>
+        <Button type="button" onClick={onSaveRandomizeAll} className="px-12">
           Roll
         </Button>
       </div>
