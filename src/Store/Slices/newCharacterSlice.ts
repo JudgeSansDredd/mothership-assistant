@@ -61,6 +61,10 @@ export const newCharacterSlice = createSlice({
       state.saves.body = action.payload.body;
     },
     setCurrentPage: (state, action: PayloadAction<number>) => {
+      if (action.payload < 0) {
+        state.currentPage = 0;
+        return;
+      }
       state.currentPage = action.payload;
     },
   },

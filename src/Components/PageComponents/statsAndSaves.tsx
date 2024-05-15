@@ -9,7 +9,6 @@ import TextInput from "../textInput";
 export default function StatsAndSaves() {
   const PAGE = 0;
   const dispatch = useAppDispatch();
-
   const transitionClasses = useTransitionClasses(PAGE);
 
   const onStatRandomizeAll = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,7 +33,9 @@ export default function StatsAndSaves() {
   };
 
   return (
-    <div className={`flex flex-col items-center ${transitionClasses}`}>
+    <div
+      className={`flex flex-col items-center absolute inset-0 ${transitionClasses} bg-black`}
+    >
       <h1 className="text-2xl">Create a Character</h1>
       <div className="grid gap-6 mb-6 md:grid-cols-2">
         <div>

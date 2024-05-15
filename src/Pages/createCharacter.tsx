@@ -7,7 +7,7 @@ import MainLayout from "../Layouts/mainLayout";
 export default function createCharacter() {
   return (
     <MainLayout title="Create">
-      <div className="h-[calc(100vh-120px)] overflow-y-scroll scroll-smooth flex min-w-max">
+      <div className="h-[calc(100vh-120px)] w-full overflow-y-scroll scroll-smooth flex justify-center relative">
         <StatsAndSaves />
         <CharacterClass />
       </div>

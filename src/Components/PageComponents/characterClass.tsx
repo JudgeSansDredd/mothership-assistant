@@ -6,7 +6,9 @@ export default function CharacterClass() {
   const transitionClasses = useTransitionClasses(PAGE);
 
   return (
-    <div className={`flex flex-col items-center ${transitionClasses}`}>
+    <div
+      className={`flex flex-col items-center absolute inset-0 ${transitionClasses} bg-black`}
+    >
       <div>
         <h2>Character Class</h2>
         <p>Choose a class for your character.</p>
