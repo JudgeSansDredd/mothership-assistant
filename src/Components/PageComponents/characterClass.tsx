@@ -1,17 +1,13 @@
 import React from "react";
+import { useTransitionClasses } from "../../Utils/functions";
 
-interface PropType {
-  visible: boolean;
-}
+export default function CharacterClass() {
+  const PAGE = 1;
+  const transitionClasses = useTransitionClasses(PAGE);
 
-export default function CharacterClass(props: PropType) {
   return (
-    <div className="overflow-hidden">
-      <div
-        className={`${
-          !props.visible ? "-translate-y-full" : ""
-        } transition duration-300 -z-10`}
-      >
+    <div className={`flex flex-col items-center ${transitionClasses}`}>
+      <div>
         <h2>Character Class</h2>
         <p>Choose a class for your character.</p>
       </div>

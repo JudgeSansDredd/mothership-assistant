@@ -2,11 +2,13 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { SaveArrayType, StatArrayType } from "../../Utils/types";
 
 interface newCharacterSliceStateType {
+  currentPage: number;
   stats: StatArrayType;
   saves: SaveArrayType;
 }
 
 const initialState: newCharacterSliceStateType = {
+  currentPage: 0,
   stats: {
     strength: undefined,
     speed: undefined,
@@ -58,9 +60,12 @@ export const newCharacterSlice = createSlice({
       state.saves.fear = action.payload.fear;
       state.saves.body = action.payload.body;
     },
+    setCurrentPage: (state, action: PayloadAction<number>) => {
+      state.currentPage = action.payload;
+    },
   },
 });
 
-export const { setStat, setSave, setStats, setSaves } =
+export const { setStat, setSave, setStats, setSaves, setCurrentPage } =
   newCharacterSlice.actions;
 export default newCharacterSlice.reducer;

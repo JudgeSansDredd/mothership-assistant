@@ -1,8 +1,6 @@
 import React from "react";
 import { setSave, setStat } from "../Store/Slices/newCharacterSlice";
 import { useAppDispatch, useAppSelector } from "../Store/hooks";
-import { rollD10 } from "../Utils/functions";
-import Button from "./button";
 
 interface PropType {
   name: string;
@@ -27,17 +25,6 @@ export default function StatEditable(props: PropType) {
     dispatch(action);
   };
 
-  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const valueToAdd = props.type === "stat" ? 25 : 10;
-    const newValue = rollD10() + rollD10() + valueToAdd;
-    const action =
-      props.type === "stat"
-        ? setStat({ stat: props.name, value: newValue })
-        : setSave({ save: props.name, value: newValue });
-    dispatch(action);
-  };
-
   return (
     <div className="flex flex-col items-center w-full">
       <div className="rounded-full p-4 border-2 border-black dark:border-white h-12 w-12 flex justify-center items-center overflow-hidden">
@@ -50,9 +37,6 @@ export default function StatEditable(props: PropType) {
         />
       </div>
       <div className="font-bold uppercase text-lg">{props.name}</div>
-      <Button type="button" onClick={onClick}>
-        Roll
-      </Button>
     </div>
   );
 }
