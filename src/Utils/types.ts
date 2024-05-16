@@ -36,6 +36,12 @@ export interface MasterSkillType {
 export type SkillType = TrainedSkillType | ExpertSkillType | MasterSkillType;
 
 export interface CharacterClass {
-  name: string;
+  name: CharacterClassName;
   description: string;
 }
+
+export type CharacterClassName =
+  | "marine"
+  | "android"
+  | "scientist"
+  | "teamster";

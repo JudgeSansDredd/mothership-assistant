@@ -1,4 +1,3 @@
-import React from "react";
 import CharacterClass from "../Components/PageComponents/characterClass";
 import CharacterCreateNav from "../Components/PageComponents/characterCreateNav";
 import StatsAndSaves from "../Components/PageComponents/statsAndSaves";

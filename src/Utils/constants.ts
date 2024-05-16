@@ -1,6 +1,6 @@
-import { SkillType } from "./types";
+import { CharacterClass, SkillType } from "./types";
 
-export const characterClasses = [
+export const characterClasses: CharacterClass[] = [
   {
     name: "marine",
     description:
@@ -328,3 +328,12 @@ export const skills: SkillType[] = [
     prerequisites: ["mysticism"],
   },
 ];
+
+export const bgColors = {
+  primary:
+    "bg-black text-white hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white",
+  secondary:
+    "text-black dark:text-white bg-gray-400 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700",
+  tertiary:
+    "text-black bg-white hover:bg-gray-100 dark:text-white dark:bg-black dark:hover:bg-gray-900",
+};

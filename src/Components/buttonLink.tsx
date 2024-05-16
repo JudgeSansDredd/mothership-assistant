@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { bgColors } from "../Utils/constants";
 
 interface PropType {
   to: string;
-  color?: "primary" | "secondary" | "tertiary";
+  color?: keyof typeof bgColors;
 }
 
 export default function ButtonLink({
@@ -12,17 +13,7 @@ export default function ButtonLink({
   color,
 }: React.PropsWithChildren<PropType>) {
   const style = color || "primary";
-  let colorClass: string = "";
-  if (style === "primary") {
-    colorClass =
-      "bg-black text-white hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white";
-  } else if (style === "secondary") {
-    colorClass =
-      "text-black dark:text-white bg-gray-400 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700";
-  } else if (style === "tertiary") {
-    colorClass =
-      "text-black bg-white hover:bg-gray-100 dark:text-white dark:bg-black dark:hover:bg-gray-900";
-  }
+  const colorClass = bgColors[style];
 
   return (
     <Link
