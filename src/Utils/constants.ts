@@ -1,21 +1,25 @@
-import { CharacterClass, SkillType } from "./types";
+import { SkillType } from "./types";
 
-export const characterClasses: CharacterClass[] = [
+export const characterClasses = [
   {
-    name: "Marine",
+    name: "marine",
     description:
       "Marines are handy in a fight, but whenever they Panic it may cause problems for the rest of the crew.",
-    stats: {
-      combat: 10,
-    },
-    saves: {
-      body: 10,
-      fear: 20,
-    },
-    wounds: 1,
-    skills: {
-      skillGrants: {},
-    },
+  },
+  {
+    name: "android",
+    description:
+      "Androids are a terrifying and exciting addition to any crew. They tend to unnerve other crewmembers with their cold inhumanity.",
+  },
+  {
+    name: "scientist",
+    description:
+      "Scientists are doctors, researchers, or anyone who wnats to slice open creatures (or infected crewmembers) with a scalpel.",
+  },
+  {
+    name: "teamster",
+    description:
+      "Teamsters are rough and tumble blue-collar space workers, mechnaics, engineers, miners, and pilots",
   },
 ];
 

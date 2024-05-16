@@ -1,5 +1,6 @@
 import React from "react";
-import { setSaves, setStats } from "../../Store/Slices/newCharacterSlice";
+import { setSaves } from "../../Store/Slices/savesSlice";
+import { setStats } from "../../Store/Slices/statsSlice";
 import { useAppDispatch } from "../../Store/hooks";
 import { rollD10, useTransitionClasses } from "../../Utils/functions";
 import Button from "../button";
@@ -34,7 +35,7 @@ export default function StatsAndSaves() {
 
   return (
     <div
-      className={`flex flex-col items-center absolute inset-0 ${transitionClasses} bg-black`}
+      className={`flex flex-col items-center absolute inset-0 ${transitionClasses}`}
     >
       <h1 className="text-2xl">Create a Character</h1>
       <div className="grid gap-6 mb-6 md:grid-cols-2">
@@ -80,7 +81,12 @@ export default function StatsAndSaves() {
           <StatEditable type="stat" name="intellect" />
           <StatEditable type="stat" name="combat" />
         </div>
-        <Button type="button" onClick={onStatRandomizeAll} className="px-12">
+        <Button
+          type="button"
+          color="primary"
+          onClick={onStatRandomizeAll}
+          className="px-12"
+        >
           Roll
         </Button>
       </div>
@@ -94,7 +100,12 @@ export default function StatsAndSaves() {
           <StatEditable type="save" name="fear" />
           <StatEditable type="save" name="body" />
         </div>
-        <Button type="button" onClick={onSaveRandomizeAll} className="px-12">
+        <Button
+          type="button"
+          color="primary"
+          onClick={onSaveRandomizeAll}
+          className="px-12"
+        >
           Roll
         </Button>
       </div>

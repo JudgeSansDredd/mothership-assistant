@@ -38,8 +38,4 @@ export type SkillType = TrainedSkillType | ExpertSkillType | MasterSkillType;
 export interface CharacterClass {
   name: string;
   description: string;
-  stats: StatArrayType;
-  saves: SaveArrayType;
-  skills: {};
-  wounds: number;
 }

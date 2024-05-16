@@ -14,10 +14,11 @@ export default function CharacterClass() {
   });
 
   return (
-    <div
-      className={`flex flex-col items-center absolute inset-0 ${transitionClasses} bg-black`}
-    >
-      {cards}
+    <div className={`fizzbang absolute inset-0 ${transitionClasses}`}>
+      <div className="flex flex-col items-center">
+        <h1 className="text-2xl mb-4">Choose a Class</h1>
+        <div className="grid gap-6 md:grid-cols-2">{cards}</div>
+      </div>
     </div>
   );
 }

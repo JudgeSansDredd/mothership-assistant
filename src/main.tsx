@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM, { Container } from "react-dom/client";
 import { Provider as ReduxProvider } from "react-redux";
 import {
   RouterProvider,
@@ -12,7 +12,7 @@ import "./index.css";
 
 const router = createBrowserRouter(createRoutesFromElements(routesFn()));
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("root") as Container).render(
   <React.StrictMode>
     <ReduxProvider store={store}>
       <RouterProvider router={router} />
