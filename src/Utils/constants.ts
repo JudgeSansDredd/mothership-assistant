@@ -5,35 +5,99 @@ export const characterClasses: CharacterClass[] = [
     name: "marine",
     description:
       "Marines are handy in a fight, but whenever they Panic it may cause problems for the rest of the crew.",
-    pretty_modifiers: [
-      "+10 Combat",
-      "+10 Body Save",
-      "+20 Fear Save",
-      "+1 Max Wound",
+    // modifiers: ["+10 Combat", "+10 Body Save", "+20 Fear Save", "+1 Max Wound"],
+    modifiers: [
+      {
+        description: "+10 Combat",
+        stats: { combat: 10 },
+      },
+      {
+        description: "+10 Body Save",
+        saves: { body: 10 },
+      },
+      {
+        description: "+20 Fear Save",
+        saves: { fear: 20 },
+      },
+      {
+        description: "+1 Max Wound",
+        wounds: 1,
+      },
     ],
+    skills: {
+      granted: ["military training", "athletics"],
+      bonus: [{ expert: 1 }, { trained: 2 }],
+    },
   },
   {
     name: "android",
     description:
       "Androids are a terrifying and exciting addition to any crew. They tend to unnerve other crewmembers with their cold inhumanity.",
-    pretty_modifiers: [
-      "+20 Intellect",
-      "-10 to 1 Stat",
-      "+60 Fear Save",
-      "+1 Max Wound",
+    modifiers: [
+      {
+        description: "+20 Intellect",
+        stats: { intellect: 20 },
+      },
+      {
+        description: "-10 to 1 Stat",
+        stats: { any: -10 },
+      },
+      {
+        description: "+60 Fear Save",
+        saves: { fear: 60 },
+      },
+      {
+        description: "+1 Max Wound",
+        wounds: 1,
+      },
     ],
+    skills: {
+      granted: ["linguistics", "computers", "mathematics"],
+      bonus: [{ expert: 1 }, { trained: 2 }],
+    },
   },
   {
     name: "scientist",
     description:
       "Scientists are doctors, researchers, or anyone who wnats to slice open creatures (or infected crewmembers) with a scalpel.",
-    pretty_modifiers: ["+10 Intellect", "+5 to 1 Stat", "+30 Sanity Save"],
+    // modifiers: ["+10 Intellect", "+5 to 1 Stat", "+30 Sanity Save"],
+    modifiers: [
+      {
+        description: "+10 Intellect",
+        stats: { intellect: 10 },
+      },
+      {
+        description: "+5 to 1 Stat",
+        stats: { any: 5 },
+      },
+      {
+        description: "+30 Sanity Save",
+        saves: { sanity: 30 },
+      },
+    ],
+    skills: {
+      bonus: [{ master: 1 }, { expert: 1 }, { trained: 2 }],
+    },
   },
   {
     name: "teamster",
     description:
       "Teamsters are rough and tumble blue-collar space workers, mechnaics, engineers, miners, and pilots",
-    pretty_modifiers: ["+5 to All Stats", "+10 to All Saves"],
+    // modifiers: ["+5 to All Stats", "+10 to All Saves"],
+    modifiers: [
+      {
+        description: "+5 to All Stats",
+        stats: { strength: 5, speed: 5, intellect: 5, combat: 5 },
+      },
+      {
+        description: "+10 to All Saves",
+        saves: { sanity: 10, fear: 10, body: 10 },
+      },
+    ],
+    skills: {
+      granted: ["industrial equipment", "zero-g"],
+      bonus: [{ trained: 1 }, { expert: 1 }],
+    },
   },
 ];
 

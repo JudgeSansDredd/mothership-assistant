@@ -38,7 +38,20 @@ export type SkillType = TrainedSkillType | ExpertSkillType | MasterSkillType;
 export interface CharacterClass {
   name: CharacterClassName;
   description: string;
-  pretty_modifiers: string[];
+  modifiers: ClassStatModifiers[];
+  skills: ClassSkillChoice;
+}
+
+interface ClassStatModifiers {
+  description: string;
+  stats?: StatArrayType | { any?: number };
+  saves?: SaveArrayType;
+  wounds?: number;
+}
+
+interface ClassSkillChoice {
+  granted?: SkillType["name"][];
+  bonus?: Partial<Record<SkillType["level"], number>>[];
 }
 
 export type CharacterClassName =

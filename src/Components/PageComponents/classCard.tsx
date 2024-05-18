@@ -37,15 +37,15 @@ export default function ClassCard(props: PropType) {
         <h5 className="text-2xl font-bold tracking-tight capitalize">
           {characterClass.name}
         </h5>
-        {selected && <p className="italic text-sm text-yellow-500">Selected</p>}
+        {selected && <p className="italic text-sm">Selected</p>}
       </div>
       <p className={selectionMade && !selected ? "text-xs" : ""}>
         {characterClass.description}
       </p>
       {selected && (
         <ul className="mt-2 font-bold text-md">
-          {characterClass.pretty_modifiers.map((mod, i) => {
-            return <ul key={i}>{mod}</ul>;
+          {characterClass.modifiers.map((mod, i) => {
+            return <ul key={i}>{mod.description}</ul>;
           })}
         </ul>
       )}
