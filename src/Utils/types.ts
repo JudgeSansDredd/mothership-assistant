@@ -38,6 +38,7 @@ export type SkillType = TrainedSkillType | ExpertSkillType | MasterSkillType;
 export interface CharacterClass {
   name: CharacterClassName;
   description: string;
+  pretty_modifiers: string[];
 }
 
 export type CharacterClassName =

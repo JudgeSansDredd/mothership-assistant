@@ -33,14 +33,22 @@ export default function ClassCard(props: PropType) {
       } w-full h-full p-6 border-2 border-black dark:border-white rounded-lg cursor-pointer overflow-hidden`}
       onClick={handleClick}
     >
-      <h5 className="text-2xl font-bold tracking-tight capitalize">
-        {characterClass.name}
-      </h5>
-      <p className="font-mono">{characterClass.description}</p>
-      <ul className="">
-        <li>Foo</li>
-        <li>bar</li>
-      </ul>
+      <div className="flex items-center space-x-2">
+        <h5 className="text-2xl font-bold tracking-tight capitalize">
+          {characterClass.name}
+        </h5>
+        {selected && <p className="italic text-sm text-yellow-500">Selected</p>}
+      </div>
+      <p className={selectionMade && !selected ? "text-xs" : ""}>
+        {characterClass.description}
+      </p>
+      {selected && (
+        <ul className="mt-2 font-bold text-md">
+          {characterClass.pretty_modifiers.map((mod, i) => {
+            return <ul key={i}>{mod}</ul>;
+          })}
+        </ul>
+      )}
     </div>
   );
 }
