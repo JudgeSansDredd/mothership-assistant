@@ -2,15 +2,13 @@ import React from "react";
 import { setSaves } from "../../Store/Slices/savesSlice";
 import { setStats } from "../../Store/Slices/statsSlice";
 import { useAppDispatch } from "../../Store/hooks";
-import { rollD10, useTransitionClasses } from "../../Utils/functions";
+import { rollD10 } from "../../Utils/functions";
 import Button from "../button";
 import StatEditable from "../statEditable";
 import TextInput from "../textInput";
 
 export default function StatsAndSaves() {
-  const PAGE = 0;
   const dispatch = useAppDispatch();
-  const transitionClasses = useTransitionClasses(PAGE);
 
   const onStatRandomizeAll = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -34,9 +32,7 @@ export default function StatsAndSaves() {
   };
 
   return (
-    <div
-      className={`flex flex-col items-center absolute inset-0 ${transitionClasses}`}
-    >
+    <div className={`flex flex-col items-center w-full h-full`}>
       <h1 className="text-2xl">Create a Character</h1>
       <div className="grid gap-6 mb-6 md:grid-cols-2">
         <div>

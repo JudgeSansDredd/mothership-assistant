@@ -5,7 +5,10 @@ export const characterClasses: CharacterClass[] = [
     name: "marine",
     description:
       "Marines are handy in a fight, but whenever they Panic it may cause problems for the rest of the crew.",
-    // modifiers: ["+10 Combat", "+10 Body Save", "+20 Fear Save", "+1 Max Wound"],
+    traumaResponse:
+      "Whenever you panic, every close friendly player must make a fear save.",
+    skillDescription:
+      "Military Training, Athletics, and 1 Expert Skill or 2 Trained Skills.",
     modifiers: [
       {
         description: "+10 Combat",
@@ -33,6 +36,10 @@ export const characterClasses: CharacterClass[] = [
     name: "android",
     description:
       "Androids are a terrifying and exciting addition to any crew. They tend to unnerve other crewmembers with their cold inhumanity.",
+    traumaResponse:
+      "Fear saves made by close friendly players are at disadvantage.",
+    skillDescription:
+      "Linguistics, Computers, Mathematics, and 1 Expert or 2 Trained Skills.",
     modifiers: [
       {
         description: "+20 Intellect",
@@ -60,7 +67,10 @@ export const characterClasses: CharacterClass[] = [
     name: "scientist",
     description:
       "Scientists are doctors, researchers, or anyone who wnats to slice open creatures (or infected crewmembers) with a scalpel.",
-    // modifiers: ["+10 Intellect", "+5 to 1 Stat", "+30 Sanity Save"],
+    traumaResponse:
+      "Whenever you fail a sanity save, all close friendly players gain one stress.",
+    skillDescription:
+      "1 Master Skill, and an Expert and Trained Skill prerequisite. Additionally, 1 Trained Skill.",
     modifiers: [
       {
         description: "+10 Intellect",
@@ -82,8 +92,11 @@ export const characterClasses: CharacterClass[] = [
   {
     name: "teamster",
     description:
-      "Teamsters are rough and tumble blue-collar space workers, mechnaics, engineers, miners, and pilots",
-    // modifiers: ["+5 to All Stats", "+10 to All Saves"],
+      "Teamsters are rough and tumble blue-collar space workers, mechnaics, engineers, miners, and pilots.",
+    traumaResponse:
+      "Once per session, you may take advantage on a panic check.",
+    skillDescription:
+      "Industrial Equipment, Zero-G, and 1 Trained Skill and 1 Expert Skill.",
     modifiers: [
       {
         description: "+5 to All Stats",

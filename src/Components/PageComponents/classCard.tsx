@@ -39,15 +39,23 @@ export default function ClassCard(props: PropType) {
         </h5>
         {selected && <p className="italic text-sm">Selected</p>}
       </div>
-      <p className={selectionMade && !selected ? "text-xs" : ""}>
+      <p className={`${selectionMade && !selected ? "text-xs" : ""} mb-2`}>
         {characterClass.description}
       </p>
       {selected && (
-        <ul className="mt-2 font-bold text-md">
+        <ul className="mb-2">
           {characterClass.modifiers.map((mod, i) => {
             return <ul key={i}>{mod.description}</ul>;
           })}
         </ul>
+      )}
+      {selected && (
+        <div className="mb-2">
+          Trauma Response: {characterClass.traumaResponse}
+        </div>
+      )}
+      {selected && (
+        <div className="mb-2">Skills: {characterClass.skillDescription}</div>
       )}
     </div>
   );

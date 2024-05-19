@@ -1,6 +1,5 @@
 import { useAppSelector } from "../../Store/hooks";
 import { characterClasses } from "../../Utils/constants";
-import { useTransitionClasses } from "../../Utils/functions";
 import ClassCard from "./classCard";
 
 export default function CharacterClass() {
@@ -8,8 +7,6 @@ export default function CharacterClass() {
     (state) => state.navigation.selectedClass
   );
   const selectionMade = selectedClass !== null;
-  const PAGE = 1;
-  const transitionClasses = useTransitionClasses(PAGE);
 
   const cards = characterClasses.map((characterClass) => {
     const selected = characterClass.name === selectedClass;
@@ -29,9 +26,7 @@ export default function CharacterClass() {
   });
 
   return (
-    <div
-      className={`absolute inset-0 flex justify-center ${transitionClasses}`}
-    >
+    <div className={`flex justify-center w-full h-full`}>
       <div className="flex flex-col items-center pb-6 max-w-2xl h-full">
         <h1 className="text-2xl mb-4">Choose a Class</h1>
         <div className="grid gap-2 md:gap-4 md:grid-cols-6 md:grid-rows-6 flex-grow min-h-0">

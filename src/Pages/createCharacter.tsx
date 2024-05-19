@@ -1,14 +1,20 @@
-import CharacterClass from "../Components/PageComponents/characterClass";
 import CharacterCreateNav from "../Components/PageComponents/characterCreateNav";
-import StatsAndSaves from "../Components/PageComponents/statsAndSaves";
+import PageControlWrapper from "../Components/PageComponents/pageControlWrapper";
 import MainLayout from "../Layouts/mainLayout";
+import { usePages } from "../Utils/functions";
 
 export default function createCharacter() {
+  const pages = usePages();
   return (
     <MainLayout title="Create">
       <div className="h-[calc(100vh-120px)] w-full overflow-y-scroll scroll-smooth flex justify-center relative">
-        <StatsAndSaves />
-        <CharacterClass />
+        {pages.map((page, i) => {
+          return (
+            <PageControlWrapper key={page.name} pageNumber={i}>
+              {page.component}
+            </PageControlWrapper>
+          );
+        })}
       </div>
       <CharacterCreateNav />
     </MainLayout>

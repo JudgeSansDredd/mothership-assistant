@@ -39,6 +39,8 @@ export interface CharacterClass {
   name: CharacterClassName;
   description: string;
   modifiers: ClassStatModifiers[];
+  traumaResponse: string;
+  skillDescription: string;
   skills: ClassSkillChoice;
 }
 

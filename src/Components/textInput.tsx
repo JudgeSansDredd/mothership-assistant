@@ -11,7 +11,7 @@ function TextInput(props: PropType, ref: React.Ref<HTMLInputElement>) {
       ref={ref}
       type="text"
       id={props.id}
-      className="border-2 border-black dark:border-white text-sm rounded-lg block w-full p-2.5 dark:placeholder-gray-400"
+      className="border-2 border-black dark:border-white text-black dark:text-black text-sm rounded-lg block w-full p-2.5 dark:placeholder-gray-400"
       placeholder={props.placeholder}
       required
     />
