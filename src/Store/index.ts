@@ -1,13 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import characterReducer from "./Slices/characterSlice";
 import navigationReducer from "./Slices/navigationSlice";
-import savesReducer from "./Slices/savesSlice";
-import statsReducer from "./Slices/statsSlice";
 
 export const store = configureStore({
   reducer: {
     navigation: navigationReducer,
-    stats: statsReducer,
-    saves: savesReducer,
+    character: characterReducer,
   },
 });
 

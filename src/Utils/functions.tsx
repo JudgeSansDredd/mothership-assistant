@@ -54,7 +54,7 @@ export const usePages = () => {
   >(defaultPages);
 
   const selectedClass = useAppSelector(
-    (state) => state.navigation.selectedClass
+    (state) => state.character.characterClass
   );
 
   useEffect(() => {
@@ -77,9 +77,7 @@ export const useNavChecks = (page: number) => {
   const pages = usePages();
   const numPages = pages.length;
   const currentPage = useAppSelector((state) => state.navigation.currentPage);
-  const selectedClass = useAppSelector(
-    (state) => state.navigation.selectedClass
-  );
+  const character = useAppSelector((state) => state.character);
 
   const [canGoLeft, setCanGoLeft] = useState(false);
   const [canGoRight, setCanGoRight] = useState(false);
@@ -87,12 +85,12 @@ export const useNavChecks = (page: number) => {
   // Check if we can go left
   useEffect(() => {
     setCanGoLeft(page > 0);
-  }, [currentPage, selectedClass, page]);
+  }, [currentPage, character.characterClass, page]);
 
   // Check if we can go right
   useEffect(() => {
     setCanGoRight(page < numPages - 1);
-  }, [currentPage, selectedClass, page]);
+  }, [currentPage, character.characterClass, page]);
 
   return { canGoLeft, canGoRight };
 };

@@ -1,6 +1,5 @@
 import React from "react";
-import { setSaves } from "../../Store/Slices/savesSlice";
-import { setStats } from "../../Store/Slices/statsSlice";
+import { setSaves, setStats } from "../../Store/Slices/characterSlice";
 import { useAppDispatch } from "../../Store/hooks";
 import { rollD10 } from "../../Utils/functions";
 import Button from "../button";

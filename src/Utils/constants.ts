@@ -1,6 +1,6 @@
-import { CharacterClass, SkillType } from "./types";
+import { CharacterClassType, SkillType } from "./types";
 
-export const characterClasses: CharacterClass[] = [
+export const characterClasses: CharacterClassType[] = [
   {
     name: "marine",
     description:

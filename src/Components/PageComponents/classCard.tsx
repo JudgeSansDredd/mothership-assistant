@@ -1,16 +1,16 @@
-import { setSelectedClass } from "../../Store/Slices/navigationSlice";
+import { setCharacterClass } from "../../Store/Slices/characterSlice";
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { bgColors } from "../../Utils/constants";
-import { CharacterClass } from "../../Utils/types";
+import { CharacterClassType } from "../../Utils/types";
 
 interface PropType {
-  characterClass: CharacterClass;
+  characterClass: CharacterClassType;
 }
 
 export default function ClassCard(props: PropType) {
   const dispatch = useAppDispatch();
   const selectedClass = useAppSelector(
-    (state) => state.navigation.selectedClass
+    (state) => state.character.characterClass
   );
   const selectionMade = selectedClass !== null;
   const selected = props.characterClass.name === selectedClass;
@@ -20,9 +20,9 @@ export default function ClassCard(props: PropType) {
   const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
     if (selected) {
-      dispatch(setSelectedClass(null));
+      dispatch(setCharacterClass(null));
     } else {
-      dispatch(setSelectedClass(characterClass.name));
+      dispatch(setCharacterClass(characterClass.name));
     }
   };
 

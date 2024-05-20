@@ -1,6 +1,5 @@
 import React from "react";
-import { setSave } from "../Store/Slices/savesSlice";
-import { setStat } from "../Store/Slices/statsSlice";
+import { setSave, setStat } from "../Store/Slices/characterSlice";
 import { useAppDispatch, useAppSelector } from "../Store/hooks";
 import { SaveType, StatType } from "../Utils/types";
 
@@ -15,16 +14,16 @@ interface SaveNameAndType {
 type PropType = StatNameAndType | SaveNameAndType;
 
 export default function StatEditable(props: PropType) {
-  const statValue: number | undefined =
+  const statValue: number | null =
     props.type === "stat"
-      ? useAppSelector((state) => state.stats[props.name])
-      : useAppSelector((state) => state.saves[props.name]);
+      ? useAppSelector((state) => state.character.stats[props.name])
+      : useAppSelector((state) => state.character.saves[props.name]);
 
   const dispatch = useAppDispatch();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const parsedValue = parseInt(e.target.value);
-    const value = isNaN(parsedValue) ? undefined : parsedValue;
+    const value = isNaN(parsedValue) ? null : parsedValue;
     if (value && (value < 0 || value > 99)) return;
     const action =
       props.type === "stat"

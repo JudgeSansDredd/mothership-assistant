@@ -4,7 +4,7 @@ import ClassCard from "./classCard";
 
 export default function CharacterClass() {
   const selectedClass = useAppSelector(
-    (state) => state.navigation.selectedClass
+    (state) => state.character.characterClass
   );
   const selectionMade = selectedClass !== null;
 
