@@ -1,5 +1,11 @@
 import React from "react";
-import { setSaves, setStats } from "../../Store/Slices/characterSlice";
+import {
+  setName,
+  setNotes,
+  setPronouns,
+  setSaves,
+  setStats,
+} from "../../Store/Slices/characterSlice";
 import { useAppDispatch } from "../../Store/hooks";
 import { rollD10 } from "../../Utils/functions";
 import Button from "../button";
@@ -30,6 +36,21 @@ export default function StatsAndSaves() {
     dispatch(setSaves(newValues));
   };
 
+  const onNameChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault();
+    dispatch(setName(e.target.value));
+  };
+
+  const onPronounsChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault();
+    dispatch(setPronouns(e.target.value));
+  };
+
+  const onNotesChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault();
+    dispatch(setNotes(e.target.value));
+  };
+
   return (
     <div className={`flex flex-col items-center w-full h-full`}>
       <h1 className="text-2xl">Create a Character</h1>
@@ -41,7 +62,11 @@ export default function StatsAndSaves() {
           >
             Character name
           </label>
-          <TextInput id="character_name" placeholder="Ellen Ripley" />
+          <TextInput
+            id="character_name"
+            placeholder="Ellen Ripley"
+            onChange={onNameChange}
+          />
         </div>
         <div>
           <label
@@ -50,7 +75,11 @@ export default function StatsAndSaves() {
           >
             Pronouns
           </label>
-          <TextInput id="pronouns" placeholder="she/her" />
+          <TextInput
+            id="pronouns"
+            placeholder="she/her"
+            onChange={onPronounsChange}
+          />
         </div>
       </div>
       <div className="mb-6">
@@ -63,6 +92,7 @@ export default function StatsAndSaves() {
         <TextInput
           id="notes"
           placeholder="32 years old, loves cats and hates coffee"
+          onChange={onNotesChange}
         />
       </div>
       <div className="text-2xl w-full text-center">Stats</div>

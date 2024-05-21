@@ -3,6 +3,7 @@ import CharacterClass from "../Components/PageComponents/characterClass";
 import StatClassSelection from "../Components/PageComponents/statClassSelection";
 import StatsAndSaves from "../Components/PageComponents/statsAndSaves";
 import { useAppSelector } from "../Store/hooks";
+import { SaveType, StatType } from "./types";
 
 export const rollD10 = () => Math.floor(Math.random() * 10 + 1);
 
@@ -89,8 +90,41 @@ export const useNavChecks = (page: number) => {
 
   // Check if we can go right
   useEffect(() => {
-    setCanGoRight(page < numPages - 1);
-  }, [currentPage, character.characterClass, page]);
+    if (pages[page].name === "statsAndSaves") {
+      const hasName = character.name !== null && character.name !== "";
+      const hasPronounds =
+        character.pronouns !== null && character.pronouns !== "";
+      const hasNotes = character.notes !== null && character.notes !== "";
+      const hasStats = (Object.keys(character.stats) as StatType[]).every(
+        (key) => character.stats[key] !== null
+      );
+      const hasSaves = (Object.keys(character.saves) as SaveType[]).every(
+        (key) => character.saves[key] !== null
+      );
+      setCanGoRight(
+        hasName && hasPronounds && hasNotes && hasStats && hasSaves
+      );
+    } else if (pages[page].name === "characterClass") {
+      setCanGoRight(character.characterClass !== null);
+    } else if (
+      pages[page].name === "androidStatSelection" ||
+      pages[page].name === "scientistStatSelection"
+    ) {
+      setCanGoRight(character.statModifierChosen !== null);
+    } else {
+      setCanGoRight(page < numPages - 1);
+    }
+  }, [
+    page,
+    numPages,
+    character.name,
+    character.pronouns,
+    character.notes,
+    character.stats,
+    character.saves,
+    character.characterClass,
+    character.statModifierChosen,
+  ]);
 
   return { canGoLeft, canGoRight };
 };

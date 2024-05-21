@@ -8,22 +8,42 @@ import {
 } from "../../Utils/types";
 
 const initialState: CharacterType = {
-  name: null,
-  pronouns: null,
-  notes: null,
+  name: "name",
+  pronouns: "pronouns",
+  notes: "notes",
   stats: {
-    strength: null,
-    speed: null,
-    intellect: null,
-    combat: null,
+    strength: 10,
+    speed: 10,
+    intellect: 10,
+    combat: 10,
   },
   saves: {
-    sanity: null,
-    fear: null,
-    body: null,
+    sanity: 10,
+    fear: 10,
+    body: 10,
   },
-  characterClass: null,
+  statModifierChosen: null,
+  characterClass: "scientist",
 };
+
+// const initialState: CharacterType = {
+//   name: null,
+//   pronouns: null,
+//   notes: null,
+//   stats: {
+//     strength: null,
+//     speed: null,
+//     intellect: null,
+//     combat: null,
+//   },
+//   saves: {
+//     sanity: null,
+//     fear: null,
+//     body: null,
+//   },
+//   statModifierChosen: null,
+//   characterClass: null,
+// };
 
 export const characterSlice = createSlice({
   name: "character",
@@ -46,6 +66,9 @@ export const characterSlice = createSlice({
     },
     setStats: (state, action: PayloadAction<StatArrayType>) => {
       state.stats = action.payload;
+    },
+    setStatModifierChosen: (state, action: PayloadAction<StatType | null>) => {
+      state.statModifierChosen = action.payload;
     },
     setSave: (
       state,
@@ -71,5 +94,6 @@ export const {
   setSaves,
   setStat,
   setStats,
+  setStatModifierChosen,
 } = characterSlice.actions;
 export default characterSlice.reducer;

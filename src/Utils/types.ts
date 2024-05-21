@@ -27,6 +27,7 @@ export interface CharacterType {
   notes: string | null;
   stats: StatArrayType;
   saves: SaveArrayType;
+  statModifierChosen: StatType | null;
   characterClass: CharacterClassName | null;
 }
 export type TrainedSkillNameType = (typeof trainedSkillNames)[number];
