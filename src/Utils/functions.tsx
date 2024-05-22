@@ -179,7 +179,7 @@ export const useGetStats = () => {
             : ` - ${-1 * chosenModifierValue} (${selectedClass} choice)`
           : "";
 
-      const formula = `${formulaBase}${formulamoModifier}${formulaChosenModifier}`;
+      const formula = `${formulaBase}${formulamoModifier}${formulaChosenModifier} = ${value}`;
 
       return { ...r, [statName]: { value, formula } };
     }, {} as StatArrayTypeWithFormula);
