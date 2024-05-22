@@ -7,7 +7,7 @@ export default function createCharacter() {
   const pages = usePages();
   return (
     <MainLayout title="Create">
-      <div className="h-[calc(100vh-120px)] w-full overflow-y-scroll scroll-smooth flex justify-center relative">
+      <div className="h-[calc(100vh-120px)] w-full overflow-y-scroll overflow-x-hidden flex justify-center relative">
         {pages.map((page, i) => {
           return (
             <PageControlWrapper key={page.name} pageNumber={i}>

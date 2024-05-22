@@ -1,13 +1,23 @@
 import {
   expertSkillNames,
   masterSkillNames,
+  saveNames,
+  statNames,
   trainedSkillNames,
 } from "./constants";
 
-export type StatType = "strength" | "speed" | "intellect" | "combat";
-export type SaveType = "sanity" | "fear" | "body";
+export type StatType = (typeof statNames)[number];
+export type SaveType = (typeof saveNames)[number];
 export type StatArrayType = Record<StatType, number | null>;
+export type StatArrayTypeWithFormula = Record<
+  StatType,
+  { value: number | null; formula: string }
+>;
 export type SaveArrayType = Record<SaveType, number | null>;
+export type SaveArrayTypeWithFormula = Record<
+  SaveType,
+  { value: number | null; formula: string }
+>;
 export type CharacterClassName =
   | "marine"
   | "android"
@@ -55,9 +65,13 @@ export type SkillType = TrainedSkillType | ExpertSkillType | MasterSkillType;
 export type SkillLevelType = SkillType["level"];
 interface ClassStatModifiers {
   description: string;
-  stats?: Partial<StatArrayType> | { any?: number };
+  stats?: Partial<StatArrayType & { any: number }>;
   saves?: Partial<SaveArrayType>;
   wounds?: number;
+}
+
+interface dumbStatArray extends StatArrayType {
+  any: number;
 }
 interface ClassSkillChoice {
   granted?: SkillType["name"][];

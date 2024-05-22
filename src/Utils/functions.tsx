@@ -3,7 +3,8 @@ import CharacterClass from "../Components/PageComponents/characterClass";
 import StatClassSelection from "../Components/PageComponents/statClassSelection";
 import StatsAndSaves from "../Components/PageComponents/statsAndSaves";
 import { useAppSelector } from "../Store/hooks";
-import { SaveType, StatType } from "./types";
+import { characterClasses, saveNames, statNames } from "./constants";
+import { StatArrayTypeWithFormula } from "./types";
 
 export const rollD10 = () => Math.floor(Math.random() * 10 + 1);
 
@@ -95,12 +96,8 @@ export const useNavChecks = (page: number) => {
       const hasPronounds =
         character.pronouns !== null && character.pronouns !== "";
       const hasNotes = character.notes !== null && character.notes !== "";
-      const hasStats = (Object.keys(character.stats) as StatType[]).every(
-        (key) => character.stats[key] !== null
-      );
-      const hasSaves = (Object.keys(character.saves) as SaveType[]).every(
-        (key) => character.saves[key] !== null
-      );
+      const hasStats = statNames.every((key) => character.stats[key] !== null);
+      const hasSaves = saveNames.every((key) => character.saves[key] !== null);
       setCanGoRight(
         hasName && hasPronounds && hasNotes && hasStats && hasSaves
       );
@@ -127,4 +124,67 @@ export const useNavChecks = (page: number) => {
   ]);
 
   return { canGoLeft, canGoRight };
+};
+
+export const useGetStats = () => {
+  const character = useAppSelector((state) => state.character);
+  const selectedClass = character.characterClass;
+  const statModifierChosen = character.statModifierChosen;
+
+  const [stats, setStats] = useState<StatArrayTypeWithFormula>({
+    strength: { value: null, formula: "" },
+    speed: { value: null, formula: "" },
+    intellect: { value: null, formula: "" },
+    combat: { value: null, formula: "" },
+  });
+
+  useEffect(() => {
+    // Set the stats based on the class
+    const stats = statNames.reduce((r, statName) => {
+      const base = character.stats[statName] || 0;
+      const characterClass = characterClasses.filter(
+        (characterClass) => characterClass.name === selectedClass
+      )[0];
+      const modifierValue =
+        characterClass.modifiers
+          .filter((mod) => {
+            return mod.stats && Object.keys(mod.stats).includes(statName);
+          })
+          .map((mod) => {
+            return mod.stats && mod.stats[statName];
+          })[0] || null;
+      const chosenModifierValue =
+        statModifierChosen === statName
+          ? characterClass.modifiers
+              .filter((mod) => {
+                return mod.stats && Object.keys(mod.stats).includes("any");
+              })
+              .map((mod) => {
+                return mod.stats && mod.stats.any;
+              })[0] || null
+          : null;
+
+      const value = base + (modifierValue || 0) + (chosenModifierValue || 0);
+      const formulaBase = `${base}`;
+      const formulamoModifier =
+        modifierValue !== null
+          ? modifierValue > 0
+            ? ` + ${modifierValue} (${selectedClass})`
+            : ` - ${-1 * modifierValue} (${selectedClass})`
+          : "";
+      const formulaChosenModifier =
+        chosenModifierValue !== null
+          ? chosenModifierValue > 0
+            ? ` + ${chosenModifierValue} (${selectedClass} choice)`
+            : ` - ${-1 * chosenModifierValue} (${selectedClass} choice)`
+          : "";
+
+      const formula = `${formulaBase}${formulamoModifier}${formulaChosenModifier}`;
+
+      return { ...r, [statName]: { value, formula } };
+    }, {} as StatArrayTypeWithFormula);
+    setStats(stats);
+  }, [selectedClass, statModifierChosen]);
+
+  return stats;
 };

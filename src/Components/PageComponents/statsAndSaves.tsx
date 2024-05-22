@@ -6,18 +6,20 @@ import {
   setSaves,
   setStats,
 } from "../../Store/Slices/characterSlice";
-import { useAppDispatch } from "../../Store/hooks";
+import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { rollD10 } from "../../Utils/functions";
+import { SaveArrayType, StatArrayType } from "../../Utils/types";
 import Button from "../button";
 import StatEditable from "../statEditable";
 import TextInput from "../textInput";
 
 export default function StatsAndSaves() {
+  const character = useAppSelector((state) => state.character);
   const dispatch = useAppDispatch();
 
   const onStatRandomizeAll = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const newValues = {
+    const newValues: StatArrayType = {
       strength: rollD10() + rollD10() + 25,
       speed: rollD10() + rollD10() + 25,
       intellect: rollD10() + rollD10() + 25,
@@ -28,7 +30,7 @@ export default function StatsAndSaves() {
 
   const onSaveRandomizeAll = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const newValues = {
+    const newValues: SaveArrayType = {
       sanity: rollD10() + rollD10() + 10,
       fear: rollD10() + rollD10() + 10,
       body: rollD10() + rollD10() + 10,
@@ -65,6 +67,7 @@ export default function StatsAndSaves() {
           <TextInput
             id="character_name"
             placeholder="Ellen Ripley"
+            value={character.name || ""}
             onChange={onNameChange}
           />
         </div>
@@ -79,6 +82,7 @@ export default function StatsAndSaves() {
             id="pronouns"
             placeholder="she/her"
             onChange={onPronounsChange}
+            value={character.pronouns || ""}
           />
         </div>
       </div>
@@ -93,6 +97,7 @@ export default function StatsAndSaves() {
           id="notes"
           placeholder="32 years old, loves cats and hates coffee"
           onChange={onNotesChange}
+          value={character.notes || ""}
         />
       </div>
       <div className="text-2xl w-full text-center">Stats</div>

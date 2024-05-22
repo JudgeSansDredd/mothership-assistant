@@ -1,5 +1,8 @@
 import { CharacterClassType, SkillType } from "./types";
 
+export const statNames = ["strength", "speed", "intellect", "combat"] as const;
+export const saveNames = ["sanity", "fear", "body"] as const;
+
 export const characterClasses: CharacterClassType[] = [
   {
     name: "marine",

@@ -1,4 +1,7 @@
-import { setCharacterClass } from "../../Store/Slices/characterSlice";
+import {
+  setCharacterClass,
+  setStatModifierChosen,
+} from "../../Store/Slices/characterSlice";
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { bgColors } from "../../Utils/constants";
 import { CharacterClassType } from "../../Utils/types";
@@ -19,6 +22,7 @@ export default function ClassCard(props: PropType) {
 
   const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
+    dispatch(setStatModifierChosen(null));
     if (selected) {
       dispatch(setCharacterClass(null));
     } else {
