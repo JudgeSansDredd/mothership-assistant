@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CharacterClass from "../Components/PageComponents/characterClass";
+import SkillSelection from "../Components/PageComponents/skillSelection";
 import StatClassSelection from "../Components/PageComponents/statClassSelection";
 import StatsAndSaves from "../Components/PageComponents/statsAndSaves";
 import { useAppSelector } from "../Store/hooks";
@@ -39,6 +40,10 @@ export const usePages = () => {
     {
       name: "characterClass",
       component: <CharacterClass />,
+    },
+    {
+      name: "skillSelection",
+      component: <SkillSelection />,
     },
     {
       name: "placeholderPage",
@@ -184,7 +189,14 @@ export const useGetStats = () => {
       return { ...r, [statName]: { value, formula } };
     }, {} as StatArrayTypeWithFormula);
     setStats(stats);
-  }, [selectedClass, statModifierChosen]);
+  }, [
+    selectedClass,
+    statModifierChosen,
+    character.stats.combat,
+    character.stats.intellect,
+    character.stats.speed,
+    character.stats.strength,
+  ]);
 
   return stats;
 };

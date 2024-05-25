@@ -23,7 +23,7 @@ const initialState: CharacterType = {
     body: 10,
   },
   statModifierChosen: null,
-  characterClass: "scientist",
+  characterClass: "marine",
 };
 
 // const initialState: CharacterType = {

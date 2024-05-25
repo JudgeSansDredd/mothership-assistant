@@ -189,11 +189,15 @@ export const skills: SkillType[] = [
     name: "botany",
     description: "The study of plant life.",
     level: "trained",
+    x: 0,
+    y: 3,
   },
   {
     name: "chemistry",
     description: "The study of matter and its chemical elements and compounds.",
     level: "trained",
+    y: 7,
+    x: 0,
   },
   {
     name: "computers",
@@ -205,23 +209,31 @@ export const skills: SkillType[] = [
     description:
       "The study of the solid features of any terrestrial planet or its satellites.",
     level: "trained",
+    x: 0,
+    y: 4,
   },
   {
     name: "industrial equipment",
     description:
       "The safe and proper use of heavy machinery and tools (exosuits, forklifts, drills, breakers, laser cutters, etc.).",
     level: "trained",
+    x: 0,
+    y: 5,
   },
   {
     name: "jury-rigging",
     description:
       "Makeshift repair, using only the tools and materials at hand.",
     level: "trained",
+    x: 0,
+    y: 6,
   },
   {
     name: "linguistics",
     description: "The study of languages (alive, dead, and undiscovered).",
     level: "trained",
+    x: 0,
+    y: 0,
   },
   {
     name: "mathematics",
@@ -254,6 +266,8 @@ export const skills: SkillType[] = [
     name: "zoology",
     description: "The study of animal life.",
     level: "trained",
+    x: 0,
+    y: 1,
   },
   {
     name: "asteroid mining",
@@ -343,6 +357,8 @@ export const skills: SkillType[] = [
     description: "The study of behavior and the human mind.",
     level: "expert",
     prerequisites: ["linguistics", "zoology", "botany"],
+    x: 1,
+    y: 0,
   },
   {
     name: "wilderness survival",
@@ -407,6 +423,8 @@ export const skills: SkillType[] = [
     description: "The study of the behavior and mind of inhuman entities.",
     level: "master",
     prerequisites: ["psychology"],
+    x: 2,
+    y: 0,
   },
   {
     name: "surgery",

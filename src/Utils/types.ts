@@ -45,23 +45,24 @@ export type ExpertSkillNameType = (typeof expertSkillNames)[number];
 export type MasterSkillNameType = (typeof masterSkillNames)[number];
 export interface TrainedSkillType {
   name: TrainedSkillNameType;
-  description: string;
   level: "trained";
   prerequisites?: never;
 }
 export interface ExpertSkillType {
   name: ExpertSkillNameType;
-  description: string;
   level: "expert";
   prerequisites: TrainedSkillNameType[];
 }
 export interface MasterSkillType {
   name: MasterSkillNameType;
-  description: string;
   level: "master";
   prerequisites: ExpertSkillNameType[];
 }
-export type SkillType = TrainedSkillType | ExpertSkillType | MasterSkillType;
+export type SkillType = (
+  | TrainedSkillType
+  | ExpertSkillType
+  | MasterSkillType
+) & { description: string; x?: number; y?: number };
 export type SkillLevelType = SkillType["level"];
 interface ClassStatModifiers {
   description: string;
@@ -70,9 +71,6 @@ interface ClassStatModifiers {
   wounds?: number;
 }
 
-interface dumbStatArray extends StatArrayType {
-  any: number;
-}
 interface ClassSkillChoice {
   granted?: SkillType["name"][];
   bonus?: Partial<Record<SkillLevelType, number>>[];

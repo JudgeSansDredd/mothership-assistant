@@ -14,10 +14,13 @@ interface SaveNameAndType {
 type PropType = StatNameAndType | SaveNameAndType;
 
 export default function StatEditable(props: PropType) {
-  const statValue: number | null =
-    props.type === "stat"
-      ? useAppSelector((state) => state.character.stats[props.name])
-      : useAppSelector((state) => state.character.saves[props.name]);
+  const statValue: number | null = useAppSelector((state) => {
+    if (props.type === "stat") {
+      return state.character.stats[props.name];
+    } else {
+      return state.character.saves[props.name];
+    }
+  });
 
   const dispatch = useAppDispatch();
 

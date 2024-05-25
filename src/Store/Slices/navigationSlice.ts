@@ -5,8 +5,12 @@ interface navigationSliceStateType {
 }
 
 const initialState: navigationSliceStateType = {
-  currentPage: 0,
+  currentPage: 2,
 };
+
+// const initialState: navigationSliceStateType = {
+//   currentPage: 0,
+// };
 
 export const navigationSlice = createSlice({
   name: "navigation",
