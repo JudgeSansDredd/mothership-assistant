@@ -23,7 +23,7 @@ export default function SkillWaypoint({ skill }: PropType) {
         dominantBaseline="middle"
         fontSize={12}
         fill="black"
-        className="stroke-black fill-black dark:stroke-white dark:fill-white"
+        className="stroke-black fill-black dark:stroke-white dark:fill-white capitalize"
       >
         {skill.name}
       </text>
