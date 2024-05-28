@@ -5,8 +5,10 @@ interface PropType {
 }
 
 export default function SkillWaypoint({ skill }: PropType) {
-  const yPosition = 50 + 30 * (skill.y ?? -10);
-  const xPosition = 50 + 200 * (skill.x ?? -10);
+  const Y_SPACING = 40;
+  const X_SPACING = 275;
+  const yPosition = 60 + Y_SPACING * (skill.y ?? -10);
+  const xPosition = 50 + X_SPACING * (skill.x ?? -10);
 
   return (
     <>

@@ -18,7 +18,7 @@ export default function SkillSelection() {
       <h1 className="text-2xl">Select your bonus skills</h1>
       <svg
         className="border border-red-500"
-        style={{ height: "800px", width: "600px" }}
+        style={{ height: "800px", width: "800px" }}
       >
         {skills.map((skill) => {
           return <SkillWaypoint key={skill.name} skill={skill} />;
