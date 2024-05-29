@@ -28,16 +28,18 @@ export default function SkillWaypoint(props: PropType) {
   }
 
   const unselectable = !granted && !selected && !preReqSatisfied;
+  const outerCircleClass = unselectable
+    ? "stroke-gray-400 dark:stroke-gray-600"
+    : "stroke-black dark:stroke-white";
+  const textClass = unselectable
+    ? "stroke-gray-400 dark:stroke-gray-600 fill-gray-400 dark:fill-gray-600"
+    : "stroke-black fill-black dark:stroke-white dark:fill-white";
 
   return (
     <>
       {/* Outer circle */}
       <circle
-        className={`stroke-2 ${
-          unselectable
-            ? "stroke-gray-400 dark:stroke-gray-600"
-            : "stroke-black dark:stroke-white"
-        }`}
+        className={`stroke-2 ${outerCircleClass}`}
         cx={xPosition}
         cy={yPosition}
         r={8}
@@ -49,6 +51,7 @@ export default function SkillWaypoint(props: PropType) {
         cy={yPosition}
         r={!granted && selected ? 5 : 7}
       />
+      {/* Label */}
       <text
         x={xPosition + 10}
         y={yPosition + 1}
@@ -56,11 +59,7 @@ export default function SkillWaypoint(props: PropType) {
         dominantBaseline="middle"
         fontSize={12}
         fill="black"
-        className={`${
-          unselectable
-            ? "stroke-gray-400 dark:stroke-gray-600 fill-gray-400 dark:fill-gray-600"
-            : "stroke-black fill-black dark:stroke-white dark:fill-white"
-        } capitalize`}
+        className={`${textClass} capitalize`}
       >
         {skill.name}
       </text>
