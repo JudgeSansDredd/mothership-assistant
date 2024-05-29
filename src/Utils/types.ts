@@ -39,6 +39,9 @@ export interface CharacterType {
   saves: SaveArrayType;
   statModifierChosen: StatType | null;
   characterClass: CharacterClassName | null;
+  selectedSkills: Array<
+    TrainedSkillNameType | ExpertSkillNameType | MasterSkillNameType
+  >;
 }
 export type TrainedSkillNameType = (typeof trainedSkillNames)[number];
 export type ExpertSkillNameType = (typeof expertSkillNames)[number];

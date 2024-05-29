@@ -6,6 +6,9 @@ export default function SkillSelection() {
   const characterClass = useAppSelector(
     (state) => state.character.characterClass
   );
+  const selectedSkills = useAppSelector(
+    (state) => state.character.selectedSkills
+  );
   if (!characterClass) return <div>Character class not selected</div>;
   const characterSkills = characterClasses.filter(
     (c) => c.name === characterClass
@@ -22,11 +25,20 @@ export default function SkillSelection() {
       >
         {skills.map((skill) => {
           const skillGranted = granted?.includes(skill.name) || false;
+          const selected = selectedSkills.includes(skill.name);
+          const preReqSatisfied = skill.prerequisites
+            ? skill.prerequisites.some((prereq) =>
+                selectedSkills.includes(prereq)
+              ) ||
+              skill.prerequisites.some((prereq) => granted?.includes(prereq))
+            : true;
           return (
             <SkillWaypoint
               key={skill.name}
               skill={skill}
               granted={skillGranted}
+              selected={selected}
+              preReqSatisfied={preReqSatisfied}
             />
           );
         })}

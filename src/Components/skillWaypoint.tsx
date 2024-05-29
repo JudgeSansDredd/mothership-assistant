@@ -3,11 +3,12 @@ import { SkillType } from "../Utils/types";
 interface PropType {
   skill: SkillType;
   granted: boolean;
+  selected: boolean;
+  preReqSatisfied: boolean;
 }
 
 export default function SkillWaypoint(props: PropType) {
-  const { skill, granted } = props;
-  const selected = false;
+  const { skill, granted, selected, preReqSatisfied } = props;
   const Y_SPACING = 40;
   const X_SPACING = 275;
   const yPosition = 60 + Y_SPACING * (skill.y ?? -10);
@@ -20,15 +21,23 @@ export default function SkillWaypoint(props: PropType) {
   } else if (selected) {
     innerCircleClass =
       "stroke-1 stroke-white dark:stroke-black fill-black dark:fill-white";
-  } else {
+  } else if (preReqSatisfied) {
     innerCircleClass = "stroke-1 stroke-black dark:stroke-white";
+  } else {
+    innerCircleClass = "stroke-1 stroke-gray-400 dark:stroke-gray-600";
   }
+
+  const unselectable = !granted && !selected && !preReqSatisfied;
 
   return (
     <>
       {/* Outer circle */}
       <circle
-        className="stroke-2 stroke-black dark:stroke-white"
+        className={`stroke-2 ${
+          unselectable
+            ? "stroke-gray-400 dark:stroke-gray-600"
+            : "stroke-black dark:stroke-white"
+        }`}
         cx={xPosition}
         cy={yPosition}
         r={8}
@@ -47,7 +56,11 @@ export default function SkillWaypoint(props: PropType) {
         dominantBaseline="middle"
         fontSize={12}
         fill="black"
-        className="stroke-black fill-black dark:stroke-white dark:fill-white capitalize"
+        className={`${
+          unselectable
+            ? "stroke-gray-400 dark:stroke-gray-600 fill-gray-400 dark:fill-gray-600"
+            : "stroke-black fill-black dark:stroke-white dark:fill-white"
+        } capitalize`}
       >
         {skill.name}
       </text>

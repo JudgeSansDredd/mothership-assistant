@@ -24,6 +24,7 @@ const initialState: CharacterType = {
   },
   statModifierChosen: null,
   characterClass: "marine",
+  selectedSkills: ["computers", "jury-rigging"],
 };
 
 // const initialState: CharacterType = {
@@ -43,6 +44,7 @@ const initialState: CharacterType = {
 //   },
 //   statModifierChosen: null,
 //   characterClass: null,
+// selectedSkills: [],
 // };
 
 export const characterSlice = createSlice({
