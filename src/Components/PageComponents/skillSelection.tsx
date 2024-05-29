@@ -21,7 +21,14 @@ export default function SkillSelection() {
         style={{ height: "800px", width: "800px" }}
       >
         {skills.map((skill) => {
-          return <SkillWaypoint key={skill.name} skill={skill} />;
+          const skillGranted = granted?.includes(skill.name) || false;
+          return (
+            <SkillWaypoint
+              key={skill.name}
+              skill={skill}
+              granted={skillGranted}
+            />
+          );
         })}
       </svg>
     </div>
