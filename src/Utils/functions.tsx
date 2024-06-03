@@ -4,8 +4,21 @@ import SkillSelection from "../Components/PageComponents/skillSelection";
 import StatClassSelection from "../Components/PageComponents/statClassSelection";
 import StatsAndSaves from "../Components/PageComponents/statsAndSaves";
 import { useAppSelector } from "../Store/hooks";
-import { characterClasses, saveNames, statNames } from "./constants";
-import { StatArrayTypeWithFormula } from "./types";
+import {
+  characterClasses,
+  expertSkillNames,
+  masterSkillNames,
+  saveNames,
+  statNames,
+  trainedSkillNames,
+} from "./constants";
+import {
+  CharacterClassType,
+  ExpertSkillNameType,
+  MasterSkillNameType,
+  StatArrayTypeWithFormula,
+  TrainedSkillNameType,
+} from "./types";
 
 export const rollD10 = () => Math.floor(Math.random() * 10 + 1);
 
@@ -199,4 +212,64 @@ export const useGetStats = () => {
   ]);
 
   return stats;
+};
+
+export const useCharacterClass = () => {
+  const [characterClass, setCharacterClass] =
+    useState<CharacterClassType | null>(null);
+  const selectedClass = useAppSelector(
+    (state) => state.character.characterClass
+  );
+
+  useEffect(() => {
+    if (selectedClass === null) {
+      setCharacterClass(null);
+    } else {
+      const characterClass = characterClasses.filter(
+        (c) => c.name === selectedClass
+      )[0];
+      setCharacterClass(characterClass);
+    }
+  }, [selectedClass]);
+
+  return characterClass;
+};
+
+export const useSelectedSkillNumbers = () => {
+  const [skillNumbers, setSkillNumbers] = useState<{
+    trained: number;
+    expert: number;
+    master: number;
+  }>({
+    trained: 0,
+    expert: 0,
+    master: 0,
+  });
+
+  const selectedSkills = useAppSelector(
+    (state) => state.character.selectedSkills
+  );
+
+  const characterClass = useCharacterClass();
+  const granted = characterClass?.skills.granted;
+
+  useEffect(() => {
+    const numTrainedSkills = selectedSkills.filter((selectedSkill) => {
+      if (granted && granted.includes(selectedSkill)) return false;
+      return trainedSkillNames.includes(selectedSkill as TrainedSkillNameType);
+    }).length;
+    const numExpertSkills = selectedSkills.filter((selectedSkill) => {
+      if (granted && granted.includes(selectedSkill)) return false;
+      return !expertSkillNames.includes(selectedSkill as ExpertSkillNameType);
+    }).length;
+    const numMasterSkills = selectedSkills.filter((selectedSkill) => {
+      if (granted && granted.includes(selectedSkill)) return false;
+      return !masterSkillNames.includes(selectedSkill as MasterSkillNameType);
+    }).length;
+    setSkillNumbers({
+      trained: numTrainedSkills,
+      expert: numExpertSkills,
+      master: numMasterSkills,
+    });
+  }, [selectedSkills]);
 };

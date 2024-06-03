@@ -1,10 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
   CharacterType,
+  ExpertSkillNameType,
+  MasterSkillNameType,
   SaveArrayType,
   SaveType,
   StatArrayType,
   StatType,
+  TrainedSkillNameType,
 } from "../../Utils/types";
 
 const initialState: CharacterType = {
@@ -84,6 +87,20 @@ export const characterSlice = createSlice({
     setCharacterClass: (state, action) => {
       state.characterClass = action.payload;
     },
+    toggleSelectedSkill: (
+      state,
+      action: PayloadAction<
+        TrainedSkillNameType | ExpertSkillNameType | MasterSkillNameType
+      >
+    ) => {
+      const skill = action.payload;
+      if (state.selectedSkills.includes(skill)) {
+        const index = state.selectedSkills.indexOf(skill);
+        state.selectedSkills.splice(index, 1);
+      } else {
+        state.selectedSkills.push(skill);
+      }
+    },
   },
 });
 
@@ -97,5 +114,6 @@ export const {
   setStat,
   setStats,
   setStatModifierChosen,
+  toggleSelectedSkill,
 } = characterSlice.actions;
 export default characterSlice.reducer;
