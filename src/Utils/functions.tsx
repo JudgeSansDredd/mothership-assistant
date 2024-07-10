@@ -27,7 +27,7 @@ export const useTransitionClasses = (page: number) => {
   const defaultTransitionClasses = "transition-all duration-300 ease-in-out";
 
   const [transitionClasses, setTransitionClasses] = useState(
-    defaultTransitionClasses
+    defaultTransitionClasses,
   );
   useEffect(() => {
     const left = currentPage > page;
@@ -74,7 +74,7 @@ export const usePages = () => {
   >(defaultPages);
 
   const selectedClass = useAppSelector(
-    (state) => state.character.characterClass
+    (state) => state.character.characterClass,
   );
 
   useEffect(() => {
@@ -117,7 +117,7 @@ export const useNavChecks = (page: number) => {
       const hasStats = statNames.every((key) => character.stats[key] !== null);
       const hasSaves = saveNames.every((key) => character.saves[key] !== null);
       setCanGoRight(
-        hasName && hasPronounds && hasNotes && hasStats && hasSaves
+        hasName && hasPronounds && hasNotes && hasStats && hasSaves,
       );
     } else if (pages[page].name === "characterClass") {
       setCanGoRight(character.characterClass !== null);
@@ -161,7 +161,7 @@ export const useGetStats = () => {
     const stats = statNames.reduce((r, statName) => {
       const base = character.stats[statName] || 0;
       const characterClass = characterClasses.filter(
-        (characterClass) => characterClass.name === selectedClass
+        (characterClass) => characterClass.name === selectedClass,
       )[0];
       const modifierValue =
         characterClass.modifiers
@@ -218,7 +218,7 @@ export const useCharacterClass = () => {
   const [characterClass, setCharacterClass] =
     useState<CharacterClassType | null>(null);
   const selectedClass = useAppSelector(
-    (state) => state.character.characterClass
+    (state) => state.character.characterClass,
   );
 
   useEffect(() => {
@@ -226,7 +226,7 @@ export const useCharacterClass = () => {
       setCharacterClass(null);
     } else {
       const characterClass = characterClasses.filter(
-        (c) => c.name === selectedClass
+        (c) => c.name === selectedClass,
       )[0];
       setCharacterClass(characterClass);
     }
@@ -247,7 +247,7 @@ export const useSelectedSkillNumbers = () => {
   });
 
   const selectedSkills = useAppSelector(
-    (state) => state.character.selectedSkills
+    (state) => state.character.selectedSkills,
   );
 
   const characterClass = useCharacterClass();

@@ -13,7 +13,7 @@ interface PropType {
 export default function ClassCard(props: PropType) {
   const dispatch = useAppDispatch();
   const selectedClass = useAppSelector(
-    (state) => state.character.characterClass
+    (state) => state.character.characterClass,
   );
   const selectionMade = selectedClass !== null;
   const selected = props.characterClass.name === selectedClass;

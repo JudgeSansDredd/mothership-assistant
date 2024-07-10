@@ -11,7 +11,7 @@ export default function SkillWaypoint(props: PropType) {
   const { skill } = props;
   const characterClass = useCharacterClass();
   const selectedSkills = useAppSelector(
-    (state) => state.character.selectedSkills
+    (state) => state.character.selectedSkills,
   );
   const dispatch = useAppDispatch();
   if (!characterClass) return <div>Character class not selected</div>;
@@ -33,7 +33,7 @@ export default function SkillWaypoint(props: PropType) {
   const preReqSatisfied = skill.prerequisites
     ? skill.prerequisites.some((prereq) => selectedSkills.includes(prereq)) ||
       skill.prerequisites.some((prereq) =>
-        characterClass.skills.granted?.includes(prereq)
+        characterClass.skills.granted?.includes(prereq),
       )
     : true;
 

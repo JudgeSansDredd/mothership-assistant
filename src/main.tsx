@@ -17,5 +17,5 @@ ReactDOM.createRoot(document.getElementById("root") as Container).render(
     <ReduxProvider store={store}>
       <RouterProvider router={router} />
     </ReduxProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

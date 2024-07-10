@@ -13,7 +13,7 @@ export default function StatClassSelection(props: PropType) {
   const dispatch = useAppDispatch();
   const stats = useGetStats();
   const statModifierChosen = useAppSelector(
-    (state) => state.character.statModifierChosen
+    (state) => state.character.statModifierChosen,
   );
 
   const statClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
