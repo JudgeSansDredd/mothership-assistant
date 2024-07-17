@@ -27,7 +27,7 @@ const initialState: CharacterType = {
   },
   statModifierChosen: null,
   characterClass: "marine",
-  selectedSkills: ["computers", "jury-rigging"],
+  selectedSkills: [],
 };
 
 // const initialState: CharacterType = {
