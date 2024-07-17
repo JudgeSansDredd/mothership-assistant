@@ -16,6 +16,8 @@ import {
   CharacterClassType,
   ExpertSkillNameType,
   MasterSkillNameType,
+  SkillLevelType,
+  SkillType,
   StatArrayTypeWithFormula,
   TrainedSkillNameType,
 } from "./types";
@@ -27,7 +29,7 @@ export const useTransitionClasses = (page: number) => {
   const defaultTransitionClasses = "transition-all duration-300 ease-in-out";
 
   const [transitionClasses, setTransitionClasses] = useState(
-    defaultTransitionClasses,
+    defaultTransitionClasses
   );
   useEffect(() => {
     const left = currentPage > page;
@@ -74,7 +76,7 @@ export const usePages = () => {
   >(defaultPages);
 
   const selectedClass = useAppSelector(
-    (state) => state.character.characterClass,
+    (state) => state.character.characterClass
   );
 
   useEffect(() => {
@@ -117,7 +119,7 @@ export const useNavChecks = (page: number) => {
       const hasStats = statNames.every((key) => character.stats[key] !== null);
       const hasSaves = saveNames.every((key) => character.saves[key] !== null);
       setCanGoRight(
-        hasName && hasPronounds && hasNotes && hasStats && hasSaves,
+        hasName && hasPronounds && hasNotes && hasStats && hasSaves
       );
     } else if (pages[page].name === "characterClass") {
       setCanGoRight(character.characterClass !== null);
@@ -161,7 +163,7 @@ export const useGetStats = () => {
     const stats = statNames.reduce((r, statName) => {
       const base = character.stats[statName] || 0;
       const characterClass = characterClasses.filter(
-        (characterClass) => characterClass.name === selectedClass,
+        (characterClass) => characterClass.name === selectedClass
       )[0];
       const modifierValue =
         characterClass.modifiers
@@ -218,7 +220,7 @@ export const useCharacterClass = () => {
   const [characterClass, setCharacterClass] =
     useState<CharacterClassType | null>(null);
   const selectedClass = useAppSelector(
-    (state) => state.character.characterClass,
+    (state) => state.character.characterClass
   );
 
   useEffect(() => {
@@ -226,7 +228,7 @@ export const useCharacterClass = () => {
       setCharacterClass(null);
     } else {
       const characterClass = characterClasses.filter(
-        (c) => c.name === selectedClass,
+        (c) => c.name === selectedClass
       )[0];
       setCharacterClass(characterClass);
     }
@@ -247,7 +249,7 @@ export const useSelectedSkillNumbers = () => {
   });
 
   const selectedSkills = useAppSelector(
-    (state) => state.character.selectedSkills,
+    (state) => state.character.selectedSkills
   );
 
   const characterClass = useCharacterClass();
@@ -260,11 +262,11 @@ export const useSelectedSkillNumbers = () => {
     }).length;
     const numExpertSkills = selectedSkills.filter((selectedSkill) => {
       if (granted && granted.includes(selectedSkill)) return false;
-      return !expertSkillNames.includes(selectedSkill as ExpertSkillNameType);
+      return expertSkillNames.includes(selectedSkill as ExpertSkillNameType);
     }).length;
     const numMasterSkills = selectedSkills.filter((selectedSkill) => {
       if (granted && granted.includes(selectedSkill)) return false;
-      return !masterSkillNames.includes(selectedSkill as MasterSkillNameType);
+      return masterSkillNames.includes(selectedSkill as MasterSkillNameType);
     }).length;
     setSkillNumbers({
       trained: numTrainedSkills,
@@ -272,4 +274,83 @@ export const useSelectedSkillNumbers = () => {
       master: numMasterSkills,
     });
   }, [selectedSkills]);
+
+  return skillNumbers;
+};
+
+export const useSkillLevelAvailable = (level: SkillLevelType) => {
+  const selectedSkillNumbers = useSelectedSkillNumbers();
+  const characterClass = useCharacterClass();
+
+  const [skillLevelAvailable, setSkillLevelAvailable] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    const skillLevelAvailable = characterClass?.skills.bonus
+      ?.map((bonusSkillSet) => {
+        const thisLevelSkillNumberAvailable = bonusSkillSet[level];
+        if (!thisLevelSkillNumberAvailable) {
+          return false;
+        }
+
+        const { trained, expert, master } = bonusSkillSet;
+        const trainedAvailable = trained || 0;
+        const expertAvailable = expert || 0;
+        const masterAvailable = master || 0;
+
+        if (
+          (selectedSkillNumbers.trained &&
+            trainedAvailable <= selectedSkillNumbers.trained) ||
+          (selectedSkillNumbers.expert &&
+            expertAvailable <= selectedSkillNumbers.expert) ||
+          (selectedSkillNumbers.master &&
+            masterAvailable <= selectedSkillNumbers.master)
+        ) {
+          return false;
+        }
+
+        return true;
+      })
+      .some((skillSet) => skillSet === true);
+    setSkillLevelAvailable(skillLevelAvailable || false);
+  }, [level, selectedSkillNumbers, characterClass?.skills.bonus]);
+
+  return skillLevelAvailable;
+};
+
+export const useSkillIsGranted = (
+  skillName: TrainedSkillNameType | ExpertSkillNameType | MasterSkillNameType
+) => {
+  const characterClass = useCharacterClass();
+  const [granted, setGranted] = useState<boolean>(false);
+
+  useEffect(() => {
+    const granted =
+      (characterClass?.skills.granted &&
+        characterClass?.skills.granted.includes(skillName)) ??
+      false;
+    setGranted(granted);
+  }, [characterClass?.skills.granted, skillName]);
+
+  return granted;
+};
+
+export const useSkillPreReqSatisfied = (skill: SkillType) => {
+  const characterClass = useCharacterClass();
+  const selectedSkills = useAppSelector(
+    (state) => state.character.selectedSkills
+  );
+  const [satisfied, setSatisfied] = useState<boolean>(false);
+
+  useEffect(() => {
+    const preReqSatisfied = skill.prerequisites
+      ? skill.prerequisites.some((prereq) => selectedSkills.includes(prereq)) ||
+        skill.prerequisites.some((prereq) =>
+          characterClass?.skills.granted?.includes(prereq)
+        )
+      : true;
+    setSatisfied(preReqSatisfied);
+  }, [skill.prerequisites, characterClass?.skills.granted]);
+
+  return satisfied;
 };

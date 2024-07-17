@@ -1,6 +1,10 @@
 import { toggleSelectedSkill } from "../Store/Slices/characterSlice";
 import { useAppDispatch, useAppSelector } from "../Store/hooks";
-import { useCharacterClass } from "../Utils/functions";
+import {
+  useSkillIsGranted,
+  useSkillLevelAvailable,
+  useSkillPreReqSatisfied,
+} from "../Utils/functions";
 import { SkillType } from "../Utils/types";
 
 interface PropType {
@@ -9,12 +13,13 @@ interface PropType {
 
 export default function SkillWaypoint(props: PropType) {
   const { skill } = props;
-  const characterClass = useCharacterClass();
+  const granted = useSkillIsGranted(skill.name);
+  const skillLevelAvailable = useSkillLevelAvailable(skill.level);
+  const preReqSatisfied = useSkillPreReqSatisfied(skill);
   const selectedSkills = useAppSelector(
-    (state) => state.character.selectedSkills,
+    (state) => state.character.selectedSkills
   );
   const dispatch = useAppDispatch();
-  if (!characterClass) return <div>Character class not selected</div>;
 
   // Spacing constants
   const Y_SPACING = 40;
@@ -24,18 +29,7 @@ export default function SkillWaypoint(props: PropType) {
   const yPosition = 60 + Y_SPACING * (skill.y ?? -10);
   const xPosition = 50 + X_SPACING * (skill.x ?? -10);
 
-  const granted =
-    characterClass.skills.granted &&
-    characterClass.skills.granted.includes(skill.name);
-
   const selected = selectedSkills.includes(skill.name);
-
-  const preReqSatisfied = skill.prerequisites
-    ? skill.prerequisites.some((prereq) => selectedSkills.includes(prereq)) ||
-      skill.prerequisites.some((prereq) =>
-        characterClass.skills.granted?.includes(prereq),
-      )
-    : true;
 
   let innerCircleClass: string = "";
   if (granted) {
@@ -44,16 +38,14 @@ export default function SkillWaypoint(props: PropType) {
   } else if (selected) {
     innerCircleClass =
       "stroke-1 stroke-white dark:stroke-black fill-black dark:fill-white";
-  } else if (preReqSatisfied) {
+  } else if (preReqSatisfied && skillLevelAvailable) {
     innerCircleClass = "stroke-1 stroke-black dark:stroke-white";
   } else {
     innerCircleClass = "stroke-1 stroke-gray-400 dark:stroke-gray-600";
   }
 
-  const bonusSkills = characterClass.skills.bonus;
-  // TODO: Bonus skills is an array of possible choices e.g. two trained skills or one master skill
-
-  const unselectable = !granted && !selected && !preReqSatisfied;
+  const unselectable =
+    !granted && !selected && (!preReqSatisfied || !skillLevelAvailable);
   const outerCircleClass = unselectable
     ? "stroke-gray-400 dark:stroke-gray-600"
     : "stroke-black dark:stroke-white";
