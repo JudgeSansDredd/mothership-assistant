@@ -50,22 +50,72 @@ export interface TrainedSkillType {
   name: TrainedSkillNameType;
   level: "trained";
   prerequisites?: never;
+  preReqLineJoinPoint?: number;
 }
+export interface PathSkipType {
+  type: "skip";
+  dx: number;
+  dy: number;
+}
+export interface LineSegmentType {
+  type: "line";
+  dx: number;
+  dy: number;
+}
+interface CurveTopStart {
+  start: "top";
+  end: "left" | "right";
+}
+interface CurveBottomStart {
+  start: "bottom";
+  end: "left" | "right";
+}
+interface CurveLeftStart {
+  start: "left";
+  end: "top" | "bottom";
+}
+interface CurveRightStart {
+  start: "right";
+  end: "top" | "bottom";
+}
+export type CurveSegmentType = (
+  | CurveTopStart
+  | CurveBottomStart
+  | CurveLeftStart
+  | CurveRightStart
+) & { type: "curve" };
+export type LineToPreReq = {
+  type: "lineToPreReq";
+  skillName: TrainedSkillNameType | ExpertSkillNameType;
+};
+export type PreReqPathSegmentType =
+  | PathSkipType
+  | LineSegmentType
+  | CurveSegmentType
+  | LineToPreReq;
+export type PreReqPathType = PreReqPathSegmentType[];
 export interface ExpertSkillType {
   name: ExpertSkillNameType;
   level: "expert";
   prerequisites: TrainedSkillNameType[];
+  preReqLines?: Array<PreReqPathType>;
+  preReqLineJoinPoint?: number;
 }
 export interface MasterSkillType {
   name: MasterSkillNameType;
   level: "master";
   prerequisites: ExpertSkillNameType[];
+  preReqLines?: Array<PreReqPathType>;
 }
 export type SkillType = (
   | TrainedSkillType
   | ExpertSkillType
   | MasterSkillType
-) & { description: string; x?: number; y?: number };
+) & {
+  description: string;
+  x?: number;
+  y?: number;
+};
 export type SkillLevelType = SkillType["level"];
 interface ClassStatModifiers {
   description: string;

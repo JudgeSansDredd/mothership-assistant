@@ -197,6 +197,7 @@ export const skills: SkillType[] = [
     level: "trained",
     x: 0,
     y: 3,
+    preReqLineJoinPoint: 56,
   },
   {
     name: "chemistry",
@@ -204,6 +205,7 @@ export const skills: SkillType[] = [
     level: "trained",
     y: 7,
     x: 0,
+    preReqLineJoinPoint: 75,
   },
   {
     name: "computers",
@@ -235,6 +237,7 @@ export const skills: SkillType[] = [
     level: "trained",
     x: 0,
     y: 6,
+    preReqLineJoinPoint: 90,
   },
   {
     name: "linguistics",
@@ -242,6 +245,7 @@ export const skills: SkillType[] = [
     level: "trained",
     x: 0,
     y: 0,
+    preReqLineJoinPoint: 80,
   },
   {
     name: "mathematics",
@@ -256,6 +260,7 @@ export const skills: SkillType[] = [
     level: "trained",
     x: 0,
     y: 14,
+    preReqLineJoinPoint: 108,
   },
   {
     name: "rimwise",
@@ -286,6 +291,7 @@ export const skills: SkillType[] = [
     level: "trained",
     x: 0,
     y: 1,
+    preReqLineJoinPoint: 63,
   },
   {
     name: "asteroid mining",
@@ -313,6 +319,23 @@ export const skills: SkillType[] = [
     prerequisites: ["jury-rigging", "chemistry", "military training"],
     x: 1,
     y: 6,
+    preReqLines: [
+      [{ type: "lineToPreReq", skillName: "jury-rigging" }],
+      [
+        { type: "line", dx: -125, dy: 0 },
+        { type: "curve", start: "right", end: "bottom" },
+        { type: "line", dx: 0, dy: 20 },
+        { type: "curve", start: "top", end: "left" },
+        { type: "lineToPreReq", skillName: "chemistry" },
+      ],
+      [
+        { type: "line", dx: -100, dy: 0 },
+        { type: "curve", start: "right", end: "bottom" },
+        { type: "line", dx: 0, dy: 300 },
+        { type: "curve", start: "top", end: "left" },
+        { type: "lineToPreReq", skillName: "military training" },
+      ],
+    ],
   },
   {
     name: "field medicine",
@@ -369,6 +392,16 @@ export const skills: SkillType[] = [
     prerequisites: ["zoology", "botany"],
     x: 1,
     y: 1,
+    preReqLines: [
+      [{ type: "lineToPreReq", skillName: "zoology" }],
+      [
+        { type: "line", dx: -100, dy: 0 },
+        { type: "curve", start: "right", end: "bottom" },
+        { type: "line", dx: 0, dy: 60 },
+        { type: "curve", start: "top", end: "left" },
+        { type: "lineToPreReq", skillName: "botany" },
+      ],
+    ],
   },
   {
     name: "pharmacology",
@@ -403,6 +436,7 @@ export const skills: SkillType[] = [
     prerequisites: ["linguistics", "zoology", "botany"],
     x: 1,
     y: 0,
+    preReqLines: [[{ type: "lineToPreReq", skillName: "linguistics" }]],
   },
   {
     name: "wilderness survival",

@@ -1,5 +1,6 @@
 import { toggleSelectedSkill } from "../Store/Slices/characterSlice";
 import { useAppDispatch, useAppSelector } from "../Store/hooks";
+import { skills } from "../Utils/constants";
 import {
   useSkillIsGranted,
   useSkillLevelAvailable,
@@ -59,6 +60,56 @@ export default function SkillWaypoint(props: PropType) {
     dispatch(toggleSelectedSkill(skill.name));
   };
 
+  const isClockwise = (start: string, end: string) => {
+    if (start === "top" && end === "left") return true;
+    if (start === "right" && end === "top") return true;
+    if (start === "bottom" && end === "right") return true;
+    if (start === "left" && end === "bottom") return true;
+    return false;
+  };
+
+  const paths =
+    skill.level !== "trained" && skill.preReqLines
+      ? skill.preReqLines.map((preReqLine) => {
+          return preReqLine.map((preReqLineSegment) => {
+            const { type } = preReqLineSegment;
+            if (type === "skip")
+              return `m ${preReqLineSegment.dx} ${preReqLineSegment.dy}`;
+            if (type === "line")
+              return `l ${preReqLineSegment.dx} ${preReqLineSegment.dy}`;
+            if (type === "curve") {
+              const { start, end } = preReqLineSegment;
+              const curveLength = 10;
+              let dx = 0;
+              let dy = 0;
+              if (start === "right" || start === "left") {
+                dx = start === "right" ? -curveLength : curveLength;
+                dy = end === "bottom" ? curveLength : -curveLength;
+              }
+              if (start === "top" || start === "bottom") {
+                dy = start === "top" ? curveLength : -curveLength;
+                dx = end === "right" ? curveLength : -curveLength;
+              }
+              return `a ${curveLength} ${curveLength} 0 0 ${isClockwise(start, end) ? 1 : 0} ${dx} ${dy}`;
+            }
+            if (type === "lineToPreReq") {
+              const { skillName } = preReqLineSegment;
+              const preReqSkill = skills.find(
+                (skill) => skill.name === skillName
+              );
+              if (!preReqSkill || preReqSkill.level === "master") return "";
+              const endX =
+                (preReqSkill.x ?? -10) * X_SPACING +
+                50 +
+                (preReqSkill.preReqLineJoinPoint ?? 0);
+              const endY = (preReqSkill.y ?? -10) * Y_SPACING + 60;
+              return `L ${endX} ${endY}`;
+            }
+            return "";
+          });
+        })
+      : [];
+
   return (
     <>
       {/* Outer circle */}
@@ -89,6 +140,25 @@ export default function SkillWaypoint(props: PropType) {
       >
         {skill.name}
       </text>
+      {paths.length && (
+        <>
+          {paths.map((pathPieces, i) => {
+            return (
+              <path
+                key={i}
+                d={[`M ${xPosition - 12} ${yPosition}`, ...pathPieces].join(
+                  " "
+                )}
+                className={`stroke-black dark:stroke-white stroke-2`}
+              />
+            );
+          })}
+          <polygon
+            points={`${xPosition - 9},${yPosition} ${xPosition - 16},${yPosition - 5} ${xPosition - 16},${yPosition + 5}`}
+            className="fill-black dark:fill-white"
+          />
+        </>
+      )}
     </>
   );
 }
