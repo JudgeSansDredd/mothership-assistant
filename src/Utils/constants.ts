@@ -175,6 +175,7 @@ export const skills: SkillType[] = [
     level: "trained",
     x: 0,
     y: 12,
+    preReqLineStartPoint: 90,
   },
   {
     name: "art",
@@ -183,6 +184,7 @@ export const skills: SkillType[] = [
     level: "trained",
     x: 0,
     y: 11,
+    preReqLineStartPoint: 35,
   },
   {
     name: "athletics",
@@ -256,6 +258,7 @@ export const skills: SkillType[] = [
     level: "trained",
     y: 10,
     x: 0,
+    preReqLineStartPoint: 90,
   },
   {
     name: "military training",
@@ -279,6 +282,7 @@ export const skills: SkillType[] = [
     level: "trained",
     x: 0,
     y: 13,
+    preReqLineStartPoint: 70,
   },
   {
     name: "zero-g",
@@ -374,7 +378,15 @@ export const skills: SkillType[] = [
         { type: "skip", dx: 0, dy: 10 },
         { type: "line", dx: 0, dy: 30 },
         { type: "skip", dx: 0, dy: 10 },
-        { type: "line", dx: 0, dy: 185 },
+        { type: "line", dx: 0, dy: 30 },
+        { type: "skip", dx: 0, dy: 10 },
+        { type: "line", dx: 0, dy: 30 },
+        { type: "skip", dx: 0, dy: 10 },
+        { type: "line", dx: 0, dy: 30 },
+        { type: "skip", dx: 0, dy: 10 },
+        { type: "line", dx: 0, dy: 30 },
+        { type: "skip", dx: 0, dy: 10 },
+        { type: "line", dx: 0, dy: 25 },
         { type: "curve", start: "top", end: "left" },
         { type: "lineToPreReq", skillName: "military training" },
       ],
@@ -469,6 +481,28 @@ export const skills: SkillType[] = [
     prerequisites: ["art", "theology", "archaeology"],
     x: 1,
     y: 11,
+    preReqLines: [
+      [
+        { type: "endArrow", position: "left" },
+        { type: "lineToPreReq", skillName: "art" },
+      ],
+      [
+        { type: "endArrow", position: "left" },
+        { type: "line", dx: -20, dy: 0 },
+        { type: "curve", start: "right", end: "bottom" },
+        { type: "line", dx: 0, dy: 60 },
+        { type: "curve", start: "top", end: "left" },
+        { type: "lineToPreReq", skillName: "theology" },
+      ],
+      [
+        { type: "endArrow", position: "left" },
+        { type: "line", dx: -20, dy: 0 },
+        { type: "curve", start: "right", end: "bottom" },
+        { type: "line", dx: 0, dy: 20 },
+        { type: "curve", start: "top", end: "left" },
+        { type: "lineToPreReq", skillName: "archaeology" },
+      ],
+    ],
   },
   {
     name: "pathology",
@@ -514,6 +548,12 @@ export const skills: SkillType[] = [
     prerequisites: ["mathematics"],
     x: 1,
     y: 10,
+    preReqLines: [
+      [
+        { type: "endArrow", position: "left" },
+        { type: "lineToPreReq", skillName: "mathematics" },
+      ],
+    ],
   },
   {
     name: "piloting",
