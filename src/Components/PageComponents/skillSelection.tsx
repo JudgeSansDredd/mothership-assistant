@@ -5,7 +5,7 @@ import SkillWaypoint from "../skillWaypoint";
 
 export default function SkillSelection() {
   const selectedSkills = useAppSelector(
-    (state) => state.character.selectedSkills,
+    (state) => state.character.selectedSkills
   );
   const characterClass = useCharacterClass();
   if (!characterClass) return <div>Character class not selected</div>;

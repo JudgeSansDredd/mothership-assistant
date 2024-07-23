@@ -50,7 +50,7 @@ export interface TrainedSkillType {
   name: TrainedSkillNameType;
   level: "trained";
   prerequisites?: never;
-  preReqLineJoinPoint?: number;
+  preReqLineStartPoint?: number;
 }
 export interface PathSkipType {
   type: "skip";
@@ -83,23 +83,28 @@ export type CurveSegmentType = (
   | CurveBottomStart
   | CurveLeftStart
   | CurveRightStart
-) & { type: "curve" };
+) & { type: "curve"; radius?: number };
 export type LineToPreReq = {
   type: "lineToPreReq";
   skillName: TrainedSkillNameType | ExpertSkillNameType;
+};
+export type EndArrowType = {
+  type: "endArrow";
+  position: "left" | "top" | "bottom";
 };
 export type PreReqPathSegmentType =
   | PathSkipType
   | LineSegmentType
   | CurveSegmentType
-  | LineToPreReq;
+  | LineToPreReq
+  | EndArrowType;
 export type PreReqPathType = PreReqPathSegmentType[];
 export interface ExpertSkillType {
   name: ExpertSkillNameType;
   level: "expert";
   prerequisites: TrainedSkillNameType[];
   preReqLines?: Array<PreReqPathType>;
-  preReqLineJoinPoint?: number;
+  preReqLineStartPoint?: number;
 }
 export interface MasterSkillType {
   name: MasterSkillNameType;
