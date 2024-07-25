@@ -615,6 +615,7 @@ export const skills: SkillType[] = [
     prerequisites: ["linguistics", "zoology", "botany"],
     x: 1,
     y: 0,
+    preReqLineStartPoint: 80,
     preReqLines: [
       [
         { type: "endArrow", position: "left" },
@@ -765,6 +766,12 @@ export const skills: SkillType[] = [
     prerequisites: ["psychology"],
     x: 2,
     y: 0,
+    preReqLines: [
+      [
+        { type: "endArrow", position: "left" },
+        { type: "lineToPreReq", skillName: "psychology" },
+      ],
+    ],
   },
   {
     name: "surgery",
