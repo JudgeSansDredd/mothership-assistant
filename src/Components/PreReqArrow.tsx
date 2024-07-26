@@ -4,6 +4,7 @@ interface PropType {
   arrowSegment: EndArrowType;
   xPosition: number;
   yPosition: number;
+  selectable: boolean;
 }
 
 export default function PreReqArrow(props: PropType) {
@@ -26,5 +27,14 @@ export default function PreReqArrow(props: PropType) {
   }
 
   const points = `${point1} ${point2} ${point3}`;
-  return <polygon points={points} className="fill-black dark:fill-white" />;
+  return (
+    <polygon
+      points={points}
+      className={
+        props.selectable
+          ? "fill-black dark:fill-white z-10"
+          : "fill-gray-400 dark:fill-gray-600 -z-10"
+      }
+    />
+  );
 }

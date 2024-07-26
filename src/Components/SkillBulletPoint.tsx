@@ -1,9 +1,10 @@
 import { useAppDispatch, useAppSelector } from "../Store/hooks";
 import { toggleSelectedSkill } from "../Store/Slices/characterSlice";
 import {
-  useSkillIsGranted,
-  useSkillLevelAvailable,
-  useSkillPreReqSatisfied,
+  getSkillIsGranted,
+  getSkillLevelAvailable,
+  getSkillPreReqSatisfied,
+  useCharacterClass,
 } from "../Utils/functions";
 import { SkillType } from "../Utils/types";
 
@@ -11,28 +12,36 @@ interface PropType {
   skill: SkillType;
   xPosition: number;
   yPosition: number;
+  selectable: boolean;
 }
 
 export default function SkillBulletPoint(props: PropType) {
-  const granted = useSkillIsGranted(props.skill.name);
-  const preReqSatisfied = useSkillPreReqSatisfied(props.skill);
-  const skillLevelAvailable = useSkillLevelAvailable(props.skill.level);
-  const dispatch = useAppDispatch();
+  const characterClass = useCharacterClass();
   const selectedSkills = useAppSelector(
     (state) => state.character.selectedSkills
   );
+  const granted = getSkillIsGranted(props.skill.name, characterClass);
+  const preReqSatisfied = getSkillPreReqSatisfied(
+    props.skill,
+    characterClass,
+    selectedSkills
+  );
+  const skillLevelAvailable = getSkillLevelAvailable(
+    props.skill.level,
+    selectedSkills,
+    characterClass
+  );
+  const dispatch = useAppDispatch();
   const selected = selectedSkills.includes(props.skill.name);
-  const unselectable =
-    !granted && !selected && (!preReqSatisfied || !skillLevelAvailable);
-  const outerCircleClass = unselectable
-    ? "stroke-gray-400 dark:stroke-gray-600"
-    : "stroke-black dark:stroke-white";
-  const textClass = unselectable
-    ? "stroke-gray-400 dark:stroke-gray-600 fill-gray-400 dark:fill-gray-600"
-    : "stroke-black fill-black dark:stroke-white dark:fill-white";
+  const outerCircleClass = props.selectable
+    ? "stroke-black dark:stroke-white"
+    : "stroke-gray-400 dark:stroke-gray-600";
+  const textClass = props.selectable
+    ? "stroke-black fill-black dark:stroke-white dark:fill-white"
+    : "stroke-gray-400 dark:stroke-gray-600 fill-gray-400 dark:fill-gray-600";
   const onClick: React.MouseEventHandler<SVGCircleElement> = (e) => {
     e.preventDefault();
-    if (unselectable) return;
+    if (!props.selectable) return;
     dispatch(toggleSelectedSkill(props.skill.name));
   };
   let innerCircleClass: string = "";

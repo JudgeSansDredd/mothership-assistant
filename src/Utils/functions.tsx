@@ -237,120 +237,100 @@ export const useCharacterClass = () => {
   return characterClass;
 };
 
-export const useSelectedSkillNumbers = () => {
-  const [skillNumbers, setSkillNumbers] = useState<{
-    trained: number;
-    expert: number;
-    master: number;
-  }>({
-    trained: 0,
-    expert: 0,
-    master: 0,
-  });
-
-  const selectedSkills = useAppSelector(
-    (state) => state.character.selectedSkills
-  );
-
-  const characterClass = useCharacterClass();
+export const getSelectedSkillNumbers = (
+  selectedSkills: Array<
+    TrainedSkillNameType | ExpertSkillNameType | MasterSkillNameType
+  >,
+  characterClass: CharacterClassType
+) => {
   const granted = characterClass?.skills.granted;
 
-  useEffect(() => {
-    const numTrainedSkills = selectedSkills.filter((selectedSkill) => {
-      if (granted && granted.includes(selectedSkill)) return false;
-      return trainedSkillNames.includes(selectedSkill as TrainedSkillNameType);
-    }).length;
-    const numExpertSkills = selectedSkills.filter((selectedSkill) => {
-      if (granted && granted.includes(selectedSkill)) return false;
-      return expertSkillNames.includes(selectedSkill as ExpertSkillNameType);
-    }).length;
-    const numMasterSkills = selectedSkills.filter((selectedSkill) => {
-      if (granted && granted.includes(selectedSkill)) return false;
-      return masterSkillNames.includes(selectedSkill as MasterSkillNameType);
-    }).length;
-    setSkillNumbers({
-      trained: numTrainedSkills,
-      expert: numExpertSkills,
-      master: numMasterSkills,
-    });
-  }, [selectedSkills]);
+  const numTrainedSkills = selectedSkills.filter((selectedSkill) => {
+    if (granted && granted.includes(selectedSkill)) return false;
+    return trainedSkillNames.includes(selectedSkill as TrainedSkillNameType);
+  }).length;
+  const numExpertSkills = selectedSkills.filter((selectedSkill) => {
+    if (granted && granted.includes(selectedSkill)) return false;
+    return expertSkillNames.includes(selectedSkill as ExpertSkillNameType);
+  }).length;
+  const numMasterSkills = selectedSkills.filter((selectedSkill) => {
+    if (granted && granted.includes(selectedSkill)) return false;
+    return masterSkillNames.includes(selectedSkill as MasterSkillNameType);
+  }).length;
+  const skillNumbers = {
+    trained: numTrainedSkills,
+    expert: numExpertSkills,
+    master: numMasterSkills,
+  };
 
   return skillNumbers;
 };
 
-export const useSkillLevelAvailable = (level: SkillLevelType) => {
-  const selectedSkillNumbers = useSelectedSkillNumbers();
-  const characterClass = useCharacterClass();
+export const getSkillLevelAvailable = (
+  level: SkillLevelType,
+  selectedSkills: Array<
+    TrainedSkillNameType | ExpertSkillNameType | MasterSkillNameType
+  >,
+  characterClass: CharacterClassType | null
+) => {
+  if (!characterClass) return false;
+  const selectedSkillNumbers = getSelectedSkillNumbers(
+    selectedSkills,
+    characterClass
+  );
 
-  const [skillLevelAvailable, setSkillLevelAvailable] =
-    useState<boolean>(false);
+  const skillLevelAvailable = characterClass.skills.bonus
+    ? characterClass.skills.bonus
+        .map((bonusSkillSet) => {
+          const thisLevelSkillNumberAvailable = bonusSkillSet[level];
+          if (!thisLevelSkillNumberAvailable) {
+            return false;
+          }
 
-  useEffect(() => {
-    const skillLevelAvailable = characterClass?.skills.bonus
-      ?.map((bonusSkillSet) => {
-        const thisLevelSkillNumberAvailable = bonusSkillSet[level];
-        if (!thisLevelSkillNumberAvailable) {
-          return false;
-        }
+          const { trained, expert, master } = bonusSkillSet;
+          const trainedAvailable = trained || 0;
+          const expertAvailable = expert || 0;
+          const masterAvailable = master || 0;
 
-        const { trained, expert, master } = bonusSkillSet;
-        const trainedAvailable = trained || 0;
-        const expertAvailable = expert || 0;
-        const masterAvailable = master || 0;
+          if (
+            (selectedSkillNumbers.trained &&
+              trainedAvailable <= selectedSkillNumbers.trained) ||
+            (selectedSkillNumbers.expert &&
+              expertAvailable <= selectedSkillNumbers.expert) ||
+            (selectedSkillNumbers.master &&
+              masterAvailable <= selectedSkillNumbers.master)
+          ) {
+            return false;
+          }
 
-        if (
-          (selectedSkillNumbers.trained &&
-            trainedAvailable <= selectedSkillNumbers.trained) ||
-          (selectedSkillNumbers.expert &&
-            expertAvailable <= selectedSkillNumbers.expert) ||
-          (selectedSkillNumbers.master &&
-            masterAvailable <= selectedSkillNumbers.master)
-        ) {
-          return false;
-        }
-
-        return true;
-      })
-      .some((skillSet) => skillSet === true);
-    setSkillLevelAvailable(skillLevelAvailable || false);
-  }, [level, selectedSkillNumbers, characterClass?.skills.bonus]);
+          return true;
+        })
+        .some((skillSet) => skillSet === true)
+    : false;
 
   return skillLevelAvailable;
 };
 
-export const useSkillIsGranted = (
-  skillName: TrainedSkillNameType | ExpertSkillNameType | MasterSkillNameType
+export const getSkillIsGranted = (
+  skillName: TrainedSkillNameType | ExpertSkillNameType | MasterSkillNameType,
+  characterClass: CharacterClassType | null
 ) => {
-  const characterClass = useCharacterClass();
-  const [granted, setGranted] = useState<boolean>(false);
-
-  useEffect(() => {
-    const granted =
-      (characterClass?.skills.granted &&
-        characterClass?.skills.granted.includes(skillName)) ??
-      false;
-    setGranted(granted);
-  }, [characterClass?.skills.granted, skillName]);
-
-  return granted;
+  if (!characterClass) return false;
+  return characterClass.skills.granted
+    ? characterClass.skills.granted.includes(skillName)
+    : false;
 };
 
-export const useSkillPreReqSatisfied = (skill: SkillType) => {
-  const characterClass = useCharacterClass();
-  const selectedSkills = useAppSelector(
-    (state) => state.character.selectedSkills
-  );
-  const [satisfied, setSatisfied] = useState<boolean>(false);
-
-  useEffect(() => {
-    const preReqSatisfied = skill.prerequisites
-      ? skill.prerequisites.some((prereq) => selectedSkills.includes(prereq)) ||
+export const getSkillPreReqSatisfied = (
+  skill: SkillType,
+  characterClass: CharacterClassType | null,
+  selectedSkills: string[]
+) => {
+  if (!characterClass) return false;
+  return skill.prerequisites
+    ? skill.prerequisites.some((prereq) => selectedSkills.includes(prereq)) ||
         skill.prerequisites.some((prereq) =>
           characterClass?.skills.granted?.includes(prereq)
         )
-      : true;
-    setSatisfied(preReqSatisfied);
-  }, [skill.prerequisites, characterClass?.skills.granted]);
-
-  return satisfied;
+    : true;
 };

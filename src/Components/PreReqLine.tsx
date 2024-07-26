@@ -6,6 +6,7 @@ interface PropType {
   preReqLine: PreReqPathType;
   xPosition: number;
   yPosition: number;
+  selectable: boolean;
 }
 
 export default function PreReqLine(props: PropType) {
@@ -74,6 +75,7 @@ export default function PreReqLine(props: PropType) {
           arrowSegment={segment}
           xPosition={props.xPosition}
           yPosition={props.yPosition}
+          selectable={props.selectable}
         />
       );
     });
@@ -82,7 +84,11 @@ export default function PreReqLine(props: PropType) {
     <>
       <path
         d={pathString}
-        className="stroke-black dark:stroke-white stroke-2 fill-none"
+        className={
+          props.selectable
+            ? "stroke-black fill-none dark:stroke-white stroke-2 z-10"
+            : "stroke-gray-400 dark:stroke-gray-600 fill-none stroke-2 -z-10"
+        }
       />
       {arrows}
     </>
