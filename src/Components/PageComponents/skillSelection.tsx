@@ -42,8 +42,6 @@ export default function SkillSelection() {
     }
   });
 
-  console.log(skills.map((s) => s.name));
-
   return (
     <div className="h-full w-full flex flex-col items-center">
       <h1 className="text-2xl">Select your bonus skills</h1>

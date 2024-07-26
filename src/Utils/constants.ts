@@ -89,7 +89,7 @@ export const characterClasses: CharacterClassType[] = [
       },
     ],
     skills: {
-      bonus: [{ master: 1 }, { expert: 1 }, { trained: 2 }],
+      bonus: [{ master: 1, expert: 1, trained: 2 }],
     },
   },
   {
@@ -112,7 +112,7 @@ export const characterClasses: CharacterClassType[] = [
     ],
     skills: {
       granted: ["industrial equipment", "zero-g"],
-      bonus: [{ trained: 1 }, { expert: 1 }],
+      bonus: [{ trained: 1, expert: 1 }],
     },
   },
 ];

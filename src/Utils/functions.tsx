@@ -279,8 +279,10 @@ export const getSkillLevelAvailable = (
     characterClass
   );
 
-  const skillLevelAvailable = characterClass.skills.bonus
-    ? characterClass.skills.bonus
+  const bonusSkillSets = characterClass.skills.bonus;
+
+  const skillLevelAvailable = bonusSkillSets
+    ? bonusSkillSets
         .map((bonusSkillSet) => {
           const thisLevelSkillNumberAvailable = bonusSkillSet[level];
           if (!thisLevelSkillNumberAvailable) {
