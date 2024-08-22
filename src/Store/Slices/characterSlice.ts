@@ -25,8 +25,8 @@ const initialState: CharacterType = {
     fear: 10,
     body: 10,
   },
-  statModifierChosen: null,
-  characterClass: "marine",
+  statModifierChosen: "intellect",
+  characterClass: "scientist",
   selectedSkills: [],
 };
 

@@ -285,7 +285,10 @@ export const getSkillLevelAvailable = (
     ? bonusSkillSets
         .map((bonusSkillSet) => {
           const thisLevelSkillNumberAvailable = bonusSkillSet[level];
-          if (!thisLevelSkillNumberAvailable) {
+          if (
+            !thisLevelSkillNumberAvailable ||
+            thisLevelSkillNumberAvailable <= selectedSkillNumbers[level]
+          ) {
             return false;
           }
 
@@ -294,13 +297,24 @@ export const getSkillLevelAvailable = (
           const expertAvailable = expert || 0;
           const masterAvailable = master || 0;
 
+          if (level === "expert") {
+            console.log(
+              "🚀 ~ .map ~ thisLevelSkillNumberAvailable:",
+              thisLevelSkillNumberAvailable
+            );
+            console.log("🚀 ~ selectedSkillNumbers:", selectedSkillNumbers);
+            console.log("🚀 ~ .map ~ trainedAvailable:", trainedAvailable);
+            console.log("🚀 ~ .map ~ expertAvailable:", expertAvailable);
+            console.log("🚀 ~ .map ~ masterAvailable:", masterAvailable);
+          }
+
           if (
             (selectedSkillNumbers.trained &&
-              trainedAvailable <= selectedSkillNumbers.trained) ||
+              trainedAvailable < selectedSkillNumbers.trained) ||
             (selectedSkillNumbers.expert &&
-              expertAvailable <= selectedSkillNumbers.expert) ||
+              expertAvailable < selectedSkillNumbers.expert) ||
             (selectedSkillNumbers.master &&
-              masterAvailable <= selectedSkillNumbers.master)
+              masterAvailable < selectedSkillNumbers.master)
           ) {
             return false;
           }
