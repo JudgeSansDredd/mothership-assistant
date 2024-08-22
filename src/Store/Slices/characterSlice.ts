@@ -30,27 +30,7 @@ const initialState: CharacterType = {
   selectedSkills: [],
 };
 
-// const initialState: CharacterType = {
-//   name: null,
-//   pronouns: null,
-//   notes: null,
-//   stats: {
-//     strength: null,
-//     speed: null,
-//     intellect: null,
-//     combat: null,
-//   },
-//   saves: {
-//     sanity: null,
-//     fear: null,
-//     body: null,
-//   },
-//   statModifierChosen: null,
-//   characterClass: null,
-// selectedSkills: [],
-// };
-
-export const characterSlice = createSlice({
+const characterSlice = createSlice({
   name: "character",
   initialState,
   reducers: {
@@ -65,7 +45,7 @@ export const characterSlice = createSlice({
     },
     setStat: (
       state,
-      action: PayloadAction<{ stat: StatType; value: number | null }>,
+      action: PayloadAction<{ stat: StatType; value: number | null }>
     ) => {
       state.stats[action.payload.stat] = action.payload.value;
     },
@@ -77,7 +57,7 @@ export const characterSlice = createSlice({
     },
     setSave: (
       state,
-      action: PayloadAction<{ save: SaveType; value: number | null }>,
+      action: PayloadAction<{ save: SaveType; value: number | null }>
     ) => {
       state.saves[action.payload.save] = action.payload.value;
     },
@@ -91,7 +71,7 @@ export const characterSlice = createSlice({
       state,
       action: PayloadAction<
         TrainedSkillNameType | ExpertSkillNameType | MasterSkillNameType
-      >,
+      >
     ) => {
       const skill = action.payload;
       if (state.selectedSkills.includes(skill)) {
