@@ -1,12 +1,15 @@
 import { skills, skillXSpacing, skillYSpacing } from "../Utils/constants";
+import { calculateSkillPosition } from "../Utils/functions";
 import { PreReqPathType } from "../Utils/types";
 import PreReqArrow from "./PreReqArrow";
 
 interface PropType {
   preReqLine: PreReqPathType;
-  xPosition: number;
-  yPosition: number;
-  selectable: boolean;
+  startPosition: {
+    x: number;
+    y: number;
+  };
+  highlighted: boolean;
 }
 
 export default function PreReqLine(props: PropType) {
@@ -17,25 +20,30 @@ export default function PreReqLine(props: PropType) {
     if (start === "left" && end === "bottom") return true;
     return false;
   };
-  const pathString = props.preReqLine
-    .map((preReqLineSegment) => {
+
+  const pathString = [
+    `M ${props.startPosition.x} ${props.startPosition.y}`,
+    ...props.preReqLine.map((preReqLineSegment) => {
       const { type } = preReqLineSegment;
       if (type === "endArrow") {
         const { position } = preReqLineSegment;
+        const { xPosition, yPosition } = calculateSkillPosition(
+          skills.find((skill) => skill.name === preReqLineSegment.skill)
+        );
         if (position === "left") {
-          return `M ${props.xPosition - 12} ${props.yPosition}`;
+          return `L ${xPosition - 12} ${yPosition}`;
         }
         if (position === "top") {
-          return `M ${props.xPosition} ${props.yPosition - 16}`;
+          return `L ${xPosition} ${yPosition - 16}`;
         }
         if (position === "bottom") {
-          return `M ${props.xPosition} ${props.yPosition + 16}`;
+          return `L ${xPosition} ${yPosition + 16}`;
         }
       }
       if (type === "skip")
         return `m ${preReqLineSegment.dx} ${preReqLineSegment.dy}`;
       if (type === "line")
-        return `l ${preReqLineSegment.dx} ${preReqLineSegment.dy}`;
+        return `l ${preReqLineSegment.dx || 0} ${preReqLineSegment.dy || 0}`;
       if (type === "curve") {
         const { start, end, radius } = preReqLineSegment;
         const curveLength = radius ?? 10;
@@ -63,19 +71,25 @@ export default function PreReqLine(props: PropType) {
         return `L ${endX} ${endY}`;
       }
       return "";
-    })
-    .join(" ");
+    }),
+  ].join(" ");
+  console.log("🚀 ~ PreReqLine ~ pathString:", pathString);
+
+  console.log(pathString);
 
   const arrows = props.preReqLine
     .filter((segment) => segment.type === "endArrow")
     .map((segment, i) => {
+      const { xPosition, yPosition } = calculateSkillPosition(
+        skills.find((skill) => skill.name === segment.skill)
+      );
       return (
         <PreReqArrow
           key={i}
           arrowSegment={segment}
-          xPosition={props.xPosition}
-          yPosition={props.yPosition}
-          selectable={props.selectable}
+          xPosition={xPosition}
+          yPosition={yPosition}
+          selectable={props.highlighted}
         />
       );
     });
@@ -85,7 +99,7 @@ export default function PreReqLine(props: PropType) {
       <path
         d={pathString}
         className={
-          props.selectable
+          props.highlighted
             ? "stroke-black fill-none dark:stroke-white stroke-2 z-10"
             : "stroke-gray-400 dark:stroke-gray-600 fill-none stroke-2 -z-10"
         }

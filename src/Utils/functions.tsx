@@ -9,6 +9,8 @@ import {
   expertSkillNames,
   masterSkillNames,
   saveNames,
+  skillXSpacing,
+  skillYSpacing,
   statNames,
   trainedSkillNames,
 } from "./constants";
@@ -297,17 +299,6 @@ export const getSkillLevelAvailable = (
           const expertAvailable = expert || 0;
           const masterAvailable = master || 0;
 
-          if (level === "expert") {
-            console.log(
-              "🚀 ~ .map ~ thisLevelSkillNumberAvailable:",
-              thisLevelSkillNumberAvailable
-            );
-            console.log("🚀 ~ selectedSkillNumbers:", selectedSkillNumbers);
-            console.log("🚀 ~ .map ~ trainedAvailable:", trainedAvailable);
-            console.log("🚀 ~ .map ~ expertAvailable:", expertAvailable);
-            console.log("🚀 ~ .map ~ masterAvailable:", masterAvailable);
-          }
-
           if (
             (selectedSkillNumbers.trained &&
               trainedAvailable < selectedSkillNumbers.trained) ||
@@ -349,4 +340,11 @@ export const getSkillPreReqSatisfied = (
           characterClass?.skills.granted?.includes(prereq)
         )
     : true;
+};
+
+export const calculateSkillPosition = (skill?: SkillType) => {
+  if (!skill) return { xPosition: 0, yPosition: 0 };
+  const yPosition = 60 + skillYSpacing * (skill.y ?? -10);
+  const xPosition = 50 + skillXSpacing * (skill.x ?? -10);
+  return { xPosition, yPosition };
 };
