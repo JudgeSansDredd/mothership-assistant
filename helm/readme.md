@@ -5,7 +5,7 @@
 With the first install, it is `crucial` to set the secrets for the database.
 
 ```
-helm upgrade --install game-library ./helm -n game-library --create-namespace \
+helm upgrade --install mothership-assistant ./helm -n mothership-assistant --create-namespace \
   --set components.db.secrets.POSTGRES_PASSWORD="<redacted>" \
   --set components.db.secrets.POSTGRES_USER="<redacted>" \
   --set components.db.secrets.POSTGRES_NAME="<redacted>" \
@@ -22,7 +22,7 @@ You will need to create the secrets for the application to use.
 Gitea Auth secret for pulling the container from the private registry
 
 ```
-kubectl -n game-library \
+kubectl -n mothership-assistant \
   create secret docker-registry gitea-auth \
   --docker-server=https://gitea.pixelparasol.com \
   --docker-username=nathan \
@@ -39,7 +39,7 @@ cd ui
 
 npm run build
 
-DOCKER_REGISTRY="gitea.pixelparasol.com/nathan/game-library" && CI_COMMIT_SHORT_SHA=$(git rev-parse --short HEAD)
+DOCKER_REGISTRY="gitea.pixelparasol.com/nathan/mothership-assistant" && CI_COMMIT_SHORT_SHA=$(git rev-parse --short HEAD)
 
 docker buildx build --no-cache -f Dockerfile . --platform linux/amd64 -t $DOCKER_REGISTRY/ui:latest -t $DOCKER_REGISTRY/ui:$CI_COMMIT_SHORT_SHA
 
@@ -55,7 +55,7 @@ cd api
 
 npm run build
 
-DOCKER_REGISTRY="gitea.pixelparasol.com/nathan/game-library" && CI_COMMIT_SHORT_SHA=$(git rev-parse --short HEAD)
+DOCKER_REGISTRY="gitea.pixelparasol.com/nathan/mothership-assistant" && CI_COMMIT_SHORT_SHA=$(git rev-parse --short HEAD)
 
 docker buildx build --no-cache -f Dockerfile . --platform linux/amd64 -t $DOCKER_REGISTRY/api:latest -t $DOCKER_REGISTRY/api:$CI_COMMIT_SHORT_SHA
 
@@ -64,10 +64,10 @@ docker login gitea.pixelparasol.com
 docker push $DOCKER_REGISTRY/api:$CI_COMMIT_SHORT_SHA; docker push $DOCKER_REGISTRY/api:latest
 ```
 
-### Game-library Secrets
+### mothership-assistant Secrets
 
 ```
-helm upgrade game-library ./helm -n game-library \
+helm upgrade mothership-assistant ./helm -n mothership-assistant \
   --set components.api.secrets.TOKEN_REFRESH_SECRET="<redacted>" \
   --set components.api.secrets.TOKEN_SECRET="<redacted>"
 ```
@@ -77,7 +77,7 @@ helm upgrade game-library ./helm -n game-library \
 > this is the db string that the api uses for prisma
 
 ```
-helm upgrade game-library ./helm -n game-library \
+helm upgrade mothership-assistant ./helm -n mothership-assistant \
   --set components.db.secrets.DATABASE_URL="<redacted>"
 ```
 
@@ -87,7 +87,7 @@ You may find yourself in a state where you need to do secret checks to see how t
 adding the `--dry-run=server` argument to your upgrade will render the secret checks.
 
 ```
-helm upgrade game-library ./helm -n game-library --dry-run=server
+helm upgrade mothership-assistant ./helm -n mothership-assistant --dry-run=server
 ```
 
 ## Helm Diff
@@ -103,7 +103,7 @@ view the diff if an upgrade were issued
 > NOTE: this will show that secrets will be removed but thats not true
 
 ```
-helm diff upgrade game-library ./helm -n game-library
+helm diff upgrade mothership-assistant ./helm -n mothership-assistant
 ```
 
 ## Deployment
@@ -111,7 +111,7 @@ helm diff upgrade game-library ./helm -n game-library
 Each component can be deployed individually by tag by specifiying it with `--set`
 
 ```
-helm upgrade game-library ./helm -n game-library --set deploy.api.tag="v1.0.4"
-helm upgrade game-library ./helm -n game-library --set deploy.db.tag="v1.0.4"
-helm upgrade game-library ./helm -n game-library --set deploy.ui.tag="v1.0.4"
+helm upgrade mothership-assistant ./helm -n mothership-assistant --set deploy.api.tag="v1.0.4"
+helm upgrade mothership-assistant ./helm -n mothership-assistant --set deploy.db.tag="v1.0.4"
+helm upgrade mothership-assistant ./helm -n mothership-assistant --set deploy.ui.tag="v1.0.4"
 ```

@@ -2,7 +2,7 @@
 
 npm run build
 
-DOCKER_REGISTRY="gitea.pixelparasol.com/nathan/game-library" && CI_COMMIT_SHORT_SHA=$(git rev-parse --short HEAD)
+DOCKER_REGISTRY="gitea.pixelparasol.com/nathan/mothership-assistant" && CI_COMMIT_SHORT_SHA=$(git rev-parse --short HEAD)
 
 docker buildx build --no-cache -f Dockerfile . --platform linux/amd64 -t $DOCKER_REGISTRY/api:latest -t $DOCKER_REGISTRY/api:$CI_COMMIT_SHORT_SHA
 

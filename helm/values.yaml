@@ -7,8 +7,6 @@ components:
     affinity: null
 
     image:
-      # repository: nginxdemos/hello
-      # tag: "latest"
       repository: gitea.pixelparasol.com/nathan/mothership-assistant/ui
       tag: "latest"
       imagePullPolicy: "Always"
