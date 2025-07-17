@@ -1,0 +1,28 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.system }}-api-ingress
+  labels:
+    app: {{ .Values.system }}-api
+    tenant: {{ .Values.system }}
+  annotations:
+    cert-manager.io/cluster-issuer: lets-encrypt-prod
+
+spec:
+  ingressClassName: {{ .Values.components.api.ingress.className }}
+  tls:
+    - hosts:
+      - "{{ .Values.components.api.ingress.domain }}"
+      secretName: {{ .Values.system }}-ingress-tls
+  rules:
+    - host: "{{ .Values.components.api.ingress.domain }}"
+      http:
+        paths:
+          - path: {{ .Values.components.api.ingress.path }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.system }}-api-service
+                port:
+                  number: {{ .Values.components.api.ingress.port }}
