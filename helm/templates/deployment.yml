@@ -1,3 +1,0 @@
-{{- range $system, $settings := .Values.components -}}
-{{ include "system.deployment.component"  (dict "component" $settings "values" $.Values "release" $.Release) }}
-{{- end }}

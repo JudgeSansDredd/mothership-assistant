@@ -1,5 +1,0 @@
-{{- range $system, $settings := .Values.components -}}
-{{ if $settings.service }}
-{{ include "system.service.component"  (dict "component" $settings "values" $.Values) }}
-{{- end }}
-{{- end }}
