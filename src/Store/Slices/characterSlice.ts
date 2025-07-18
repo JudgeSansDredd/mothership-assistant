@@ -14,8 +14,9 @@ import {
 
 const initialState: CharacterType = {
   name: import.meta.env.VITE_ENVIRONMENT === "development" ? "Nathan" : "",
-  pronouns: "he/him",
-  notes: "32, overweight",
+  pronouns: import.meta.env.VITE_ENVIRONMENT === "development" ? "he/him" : "",
+  notes:
+    import.meta.env.VITE_ENVIRONMENT === "development" ? "32, overweight" : "",
   stats: {
     strength: 10,
     speed: 10,
@@ -27,8 +28,10 @@ const initialState: CharacterType = {
     fear: 10,
     body: 10,
   },
-  statModifierChosen: "intellect",
-  characterClass: "scientist",
+  statModifierChosen:
+    import.meta.env.VITE_ENVIRONMENT === "development" ? "intellect" : null,
+  characterClass:
+    import.meta.env.VITE_ENVIRONMENT === "development" ? "scientist" : null,
   selectedSkills: [],
 };
 

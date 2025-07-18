@@ -6,7 +6,7 @@ interface navigationSliceStateType {
 }
 
 const initialState: navigationSliceStateType = {
-  currentPage: 3,
+  currentPage: import.meta.env.VITE_ENVIRONMENT === "development" ? 3 : 0,
 };
 
 // const initialState: navigationSliceStateType = {
