@@ -5,7 +5,7 @@ interface navigationSliceStateType {
 }
 
 const initialState: navigationSliceStateType = {
-  currentPage: 3,
+  currentPage: 0,
 };
 
 // const initialState: navigationSliceStateType = {

@@ -1,0 +1,49 @@
+system: mothership-assistant
+
+components:
+  ui:
+    name: mothership-assistant
+
+    affinity: null
+
+    image:
+      # repository: nginxdemos/hello
+      # tag: "latest"
+      repository: gitea.pixelparasol.com/nathan/mothership-assistant
+      tag: "latest"
+      imagePullPolicy: "Always"
+      imagePullSecrets: "gitea-auth"
+
+    ingress:
+      tls: true
+      domain: mothership.nathanbstanley.com
+      path: /
+      className: "nginx"
+      port: 80
+
+    service:
+      type: ClusterIP
+      ports:
+        - protocol: TCP
+          port: 80
+          targetPort: 80
+          name: http
+
+    deployment:
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+
+    volumes:
+      - name: nginx-configmap
+        type: configMap
+        mountPath: "/etc/nginx/conf.d/default.conf"
+        subPath: "default.conf"
+
+backups:
+  enabled: false
+  image: alpine
+  nas_ip: 192.168.1.12
+  system_name: "mothership-assistant"
+  volumes: []

@@ -11,9 +11,9 @@ import {
 } from "../../Utils/types";
 
 const initialState: CharacterType = {
-  name: "name",
-  pronouns: "pronouns",
-  notes: "notes",
+  name: "",
+  pronouns: "",
+  notes: "",
   stats: {
     strength: 10,
     speed: 10,

@@ -4,10 +4,10 @@ npm run build
 
 DOCKER_REGISTRY="gitea.pixelparasol.com/nathan/mothership-assistant" && CI_COMMIT_SHORT_SHA=$(git rev-parse --short HEAD)
 
-docker buildx build --no-cache -f Dockerfile . --platform linux/amd64 -t $DOCKER_REGISTRY/ui:latest -t $DOCKER_REGISTRY/ui:$CI_COMMIT_SHORT_SHA
+docker buildx build --no-cache -f Dockerfile . --platform linux/amd64 -t $DOCKER_REGISTRY:latest -t $DOCKER_REGISTRY:$CI_COMMIT_SHORT_SHA
 
 docker login gitea.pixelparasol.com
 
-docker push $DOCKER_REGISTRY/ui:$CI_COMMIT_SHORT_SHA
+docker push $DOCKER_REGISTRY:$CI_COMMIT_SHORT_SHA
 
-docker push $DOCKER_REGISTRY/ui:latest
+docker push $DOCKER_REGISTRY:latest
