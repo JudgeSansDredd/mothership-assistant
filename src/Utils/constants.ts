@@ -176,6 +176,15 @@ export const skills: SkillType[] = [
     x: 0,
     y: 12,
     preReqLineStartPoint: 90,
+    preReqLines: [
+      [
+        { type: "line", dx: 130 },
+        { type: "curve", start: "left", end: "top" },
+        { type: "line", dy: -20 },
+        { type: "curve", start: "bottom", end: "right" },
+        { type: "endArrow", position: "left", skill: "mysticism" },
+      ],
+    ],
   },
   {
     name: "art",
@@ -185,6 +194,7 @@ export const skills: SkillType[] = [
     x: 0,
     y: 11,
     preReqLineStartPoint: 35,
+    preReqLines: [[{ type: "endArrow", position: "left", skill: "mysticism" }]],
   },
   {
     name: "athletics",
@@ -193,6 +203,16 @@ export const skills: SkillType[] = [
     x: 0,
     y: 16,
     preReqLineStartPoint: 70,
+    preReqLines: [
+      [
+        { type: "line", dx: 150 },
+        { type: "curve", start: "left", end: "top" },
+        { type: "line", dy: -20 },
+        { type: "curve", start: "bottom", end: "right" },
+
+        { type: "endArrow", position: "left", skill: "hand-to-hand combat" },
+      ],
+    ],
   },
   {
     name: "botany",
@@ -234,6 +254,15 @@ export const skills: SkillType[] = [
         { type: "endArrow", position: "top", skill: "field medicine" },
       ],
       [{ type: "endArrow", position: "left", skill: "ecology" }],
+      [
+        { type: "line", dx: 140 },
+        { type: "curve", start: "left", end: "bottom" },
+        { type: "line", dy: 350 },
+        { type: "curve", start: "top", end: "right" },
+        { type: "line", dx: 49 },
+        { type: "curve", start: "left", end: "bottom" },
+        { type: "endArrow", position: "top", skill: "wilderness survival" },
+      ],
     ],
   },
   {
@@ -243,6 +272,16 @@ export const skills: SkillType[] = [
     y: 7,
     x: 0,
     preReqLineStartPoint: 75,
+    preReqLines: [
+      [{ type: "endArrow", position: "left", skill: "pharmacology" }],
+      [
+        { type: "line", dx: 40 },
+        { type: "curve", start: "left", end: "top" },
+        { type: "line", dy: -20 },
+        { type: "curve", start: "bottom", end: "right" },
+        { type: "endArrow", position: "left", skill: "explosives" },
+      ],
+    ],
   },
   {
     name: "computers",
@@ -251,6 +290,7 @@ export const skills: SkillType[] = [
     y: 8,
     x: 0,
     preReqLineStartPoint: 80,
+    preReqLines: [[{ type: "endArrow", position: "left", skill: "hacking" }]],
   },
   {
     name: "geology",
@@ -260,6 +300,16 @@ export const skills: SkillType[] = [
     x: 0,
     y: 4,
     preReqLineStartPoint: 65,
+    preReqLines: [
+      [
+        { type: "line", dx: 150 },
+        { type: "curve", start: "left", end: "top" },
+        { type: "line", dy: -20 },
+        { type: "curve", start: "bottom", end: "right" },
+        { type: "endArrow", position: "left", skill: "ecology" },
+      ],
+      [{ type: "endArrow", position: "left", skill: "asteroid mining" }],
+    ],
   },
   {
     name: "industrial equipment",
@@ -269,6 +319,16 @@ export const skills: SkillType[] = [
     x: 0,
     y: 5,
     preReqLineStartPoint: 135,
+    preReqLines: [
+      [
+        { type: "line", dx: 75 },
+        { type: "curve", start: "left", end: "top" },
+        { type: "line", dy: -20 },
+        { type: "curve", start: "bottom", end: "right" },
+        { type: "endArrow", position: "left", skill: "asteroid mining" },
+      ],
+      [{ type: "endArrow", position: "left", skill: "mechanical repair" }],
+    ],
   },
   {
     name: "jury-rigging",
@@ -278,6 +338,18 @@ export const skills: SkillType[] = [
     x: 0,
     y: 6,
     preReqLineStartPoint: 90,
+    preReqLines: [
+      [
+        { type: "line", dx: 20 },
+        { type: "curve", start: "bottom", end: "right" },
+        { type: "line", dx: 85 },
+        { type: "curve", start: "left", end: "top" },
+        { type: "line", dy: -10 },
+        { type: "curve", start: "bottom", end: "right" },
+        { type: "endArrow", position: "left", skill: "mechanical repair" },
+      ],
+      [{ type: "endArrow", position: "left", skill: "explosives" }],
+    ],
   },
   {
     name: "linguistics",
@@ -297,6 +369,7 @@ export const skills: SkillType[] = [
     y: 10,
     x: 0,
     preReqLineStartPoint: 90,
+    preReqLines: [[{ type: "endArrow", position: "left", skill: "physics" }]],
   },
   {
     name: "military training",
@@ -305,6 +378,31 @@ export const skills: SkillType[] = [
     x: 0,
     y: 14,
     preReqLineStartPoint: 108,
+    preReqLines: [
+      [
+        { type: "line", dx: 50 },
+        { type: "curve", start: "left", end: "top" },
+        { type: "line", dy: -300 },
+        { type: "curve", start: "bottom", end: "right" },
+        { type: "endArrow", position: "left", skill: "explosives" },
+      ],
+      [{ type: "endArrow", position: "left", skill: "firearms" }],
+      [
+        { type: "line", dx: 30 },
+        { type: "curve", start: "left", end: "bottom" },
+        { type: "line", dy: 20 },
+        { type: "curve", start: "top", end: "right" },
+        { type: "endArrow", position: "left", skill: "hand-to-hand combat" },
+      ],
+      [
+        { type: "line", dx: 130 },
+        { type: "line", dy: -5 },
+        { type: "curve", start: "bottom", end: "right" },
+        { type: "line", dx: 16 },
+        { type: "curve", start: "left", end: "top" },
+        { type: "endArrow", position: "bottom", skill: "wilderness survival" },
+      ],
+    ],
   },
   {
     name: "rimwise",
@@ -314,6 +412,17 @@ export const skills: SkillType[] = [
     x: 0,
     y: 15,
     preReqLineStartPoint: 65,
+    preReqLines: [
+      [{ type: "endArrow", position: "left", skill: "hand-to-hand combat" }],
+      [
+        { type: "line", dx: 120 },
+        { type: "line", dy: -5 },
+        { type: "curve", start: "bottom", end: "right" },
+        { type: "line", dx: 70 },
+        { type: "curve", start: "left", end: "top" },
+        { type: "endArrow", position: "bottom", skill: "firearms" },
+      ],
+    ],
   },
   {
     name: "theology",
@@ -322,6 +431,15 @@ export const skills: SkillType[] = [
     x: 0,
     y: 13,
     preReqLineStartPoint: 70,
+    preReqLines: [
+      [
+        { type: "line", dx: 150 },
+        { type: "curve", start: "left", end: "top" },
+        { type: "line", dy: -60 },
+        { type: "curve", start: "bottom", end: "right" },
+        { type: "endArrow", position: "left", skill: "mysticism" },
+      ],
+    ],
   },
   {
     name: "zero-g",
@@ -331,6 +449,7 @@ export const skills: SkillType[] = [
     y: 9,
     x: 0,
     preReqLineStartPoint: 60,
+    preReqLines: [[{ type: "endArrow", position: "left", skill: "piloting" }]],
   },
   {
     name: "zoology",
@@ -367,20 +486,6 @@ export const skills: SkillType[] = [
     prerequisites: ["industrial equipment", "geology"],
     x: 1,
     y: 4,
-    preReqLines: [
-      // [
-      //   { type: "endArrow", position: "left" },
-      //   { type: "lineToPreReq", skillName: "geology" },
-      // ],
-      // [
-      //   { type: "endArrow", position: "bottom" },
-      //   { type: "curve", start: "top", end: "left" },
-      //   { type: "line", dx: -10, dy: 0 },
-      //   { type: "curve", start: "right", end: "bottom" },
-      //   { type: "line", dx: 0, dy: 4 },
-      //   { type: "lineToPreReq", skillName: "industrial equipment" },
-      // ],
-    ],
   },
   {
     name: "ecology",
@@ -390,20 +495,6 @@ export const skills: SkillType[] = [
     prerequisites: ["botany", "geology"],
     x: 1,
     y: 3,
-    // preReqLines: [
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "lineToPreReq", skillName: "botany" },
-    //   ],
-    //   [
-    //     { type: "endArrow", position: "bottom" },
-    //     { type: "curve", start: "top", end: "left" },
-    //     { type: "line", dx: -10, dy: 0 },
-    //     { type: "curve", start: "right", end: "bottom" },
-    //     { type: "line", dx: 0, dy: 4 },
-    //     { type: "lineToPreReq", skillName: "geology" },
-    //   ],
-    // ],
   },
   {
     name: "explosives",
@@ -413,42 +504,6 @@ export const skills: SkillType[] = [
     prerequisites: ["jury-rigging", "chemistry", "military training"],
     x: 1,
     y: 6,
-    // preReqLines: [
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "lineToPreReq", skillName: "jury-rigging" },
-    //   ],
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "line", dx: -125, dy: 0 },
-    //     { type: "curve", start: "right", end: "bottom" },
-    //     { type: "line", dx: 0, dy: 20 },
-    //     { type: "curve", start: "top", end: "left" },
-    //     { type: "lineToPreReq", skillName: "chemistry" },
-    //   ],
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "line", dx: -100, dy: 0 },
-    //     { type: "curve", start: "right", end: "bottom" },
-    //     { type: "line", dx: 0, dy: 25 },
-    //     { type: "skip", dx: 0, dy: 10 },
-    //     { type: "line", dx: 0, dy: 30 },
-    //     { type: "skip", dx: 0, dy: 10 },
-    //     { type: "line", dx: 0, dy: 30 },
-    //     { type: "skip", dx: 0, dy: 10 },
-    //     { type: "line", dx: 0, dy: 30 },
-    //     { type: "skip", dx: 0, dy: 10 },
-    //     { type: "line", dx: 0, dy: 30 },
-    //     { type: "skip", dx: 0, dy: 10 },
-    //     { type: "line", dx: 0, dy: 30 },
-    //     { type: "skip", dx: 0, dy: 10 },
-    //     { type: "line", dx: 0, dy: 30 },
-    //     { type: "skip", dx: 0, dy: 10 },
-    //     { type: "line", dx: 0, dy: 25 },
-    //     { type: "curve", start: "top", end: "left" },
-    //     { type: "lineToPreReq", skillName: "military training" },
-    //   ],
-    // ],
   },
   {
     name: "field medicine",
@@ -457,28 +512,6 @@ export const skills: SkillType[] = [
     prerequisites: ["zoology", "botany"],
     x: 1,
     y: 2,
-    // preReqLines: [
-    //   [
-    //     { type: "endArrow", position: "top" },
-    //     { type: "curve", start: "bottom", end: "left" },
-    //     { type: "line", dx: -10, dy: 0 },
-    //     { type: "curve", start: "right", end: "top" },
-    //     { type: "line", dx: 0, dy: -4 },
-    //     { type: "lineToPreReq", skillName: "zoology" },
-    //   ],
-    //   [
-    //     { type: "endArrow", position: "top" },
-    //     { type: "curve", start: "bottom", end: "left" },
-    //     { type: "line", dx: -10, dy: 0 },
-    //     { type: "curve", start: "right", end: "top" },
-    //     { type: "line", dx: 0, dy: -4 },
-    //     { type: "line", dx: -82, dy: 0 },
-    //     { type: "curve", start: "right", end: "bottom" },
-    //     { type: "line", dx: 0, dy: 60 },
-    //     { type: "curve", start: "top", end: "left" },
-    //     { type: "lineToPreReq", skillName: "botany" },
-    //   ],
-    // ],
   },
   {
     name: "firearms",
@@ -487,20 +520,6 @@ export const skills: SkillType[] = [
     prerequisites: ["military training", "rimwise"],
     x: 1,
     y: 14,
-    // preReqLines: [
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "lineToPreReq", skillName: "military training" },
-    //   ],
-    //   [
-    //     { type: "endArrow", position: "bottom" },
-    //     { type: "curve", start: "top", end: "left" },
-    //     { type: "line", dx: -105, dy: 0 },
-    //     { type: "curve", start: "right", end: "bottom" },
-    //     { type: "line", dx: 0, dy: 4 },
-    //     { type: "lineToPreReq", skillName: "rimwise" },
-    //   ],
-    // ],
   },
   {
     name: "hacking",
@@ -509,12 +528,6 @@ export const skills: SkillType[] = [
     prerequisites: ["computers"],
     x: 1,
     y: 8,
-    // preReqLines: [
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "lineToPreReq", skillName: "computers" },
-    //   ],
-    // ],
   },
   {
     name: "hand-to-hand combat",
@@ -523,28 +536,6 @@ export const skills: SkillType[] = [
     prerequisites: ["rimwise", "athletics"],
     x: 1,
     y: 15,
-    // preReqLines: [
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "lineToPreReq", skillName: "rimwise" },
-    //   ],
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "line", dx: -125, dy: 0 },
-    //     { type: "curve", start: "right", end: "top" },
-    //     { type: "line", dx: 0, dy: -20 },
-    //     { type: "curve", start: "bottom", end: "left" },
-    //     { type: "lineToPreReq", skillName: "military training" },
-    //   ],
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "line", dx: -50, dy: 0 },
-    //     { type: "curve", start: "right", end: "bottom" },
-    //     { type: "line", dx: 0, dy: 20 },
-    //     { type: "curve", start: "top", end: "left" },
-    //     { type: "lineToPreReq", skillName: "athletics" },
-    //   ],
-    // ],
   },
   {
     name: "mechanical repair",
@@ -553,20 +544,6 @@ export const skills: SkillType[] = [
     prerequisites: ["industrial equipment", "jury-rigging"],
     x: 1,
     y: 5,
-    // preReqLines: [
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "lineToPreReq", skillName: "industrial equipment" },
-    //   ],
-    //   [
-    //     { type: "endArrow", position: "bottom" },
-    //     { type: "curve", start: "top", end: "left" },
-    //     { type: "line", dx: -150, dy: 0 },
-    //     { type: "curve", start: "right", end: "bottom" },
-    //     { type: "line", dx: 0, dy: 4 },
-    //     { type: "lineToPreReq", skillName: "jury-rigging" },
-    //   ],
-    // ],
   },
   {
     name: "mysticism",
@@ -575,28 +552,6 @@ export const skills: SkillType[] = [
     prerequisites: ["art", "theology", "archaeology"],
     x: 1,
     y: 11,
-    // preReqLines: [
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "lineToPreReq", skillName: "art" },
-    //   ],
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "line", dx: -20, dy: 0 },
-    //     { type: "curve", start: "right", end: "bottom" },
-    //     { type: "line", dx: 0, dy: 60 },
-    //     { type: "curve", start: "top", end: "left" },
-    //     { type: "lineToPreReq", skillName: "theology" },
-    //   ],
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "line", dx: -20, dy: 0 },
-    //     { type: "curve", start: "right", end: "bottom" },
-    //     { type: "line", dx: 0, dy: 20 },
-    //     { type: "curve", start: "top", end: "left" },
-    //     { type: "lineToPreReq", skillName: "archaeology" },
-    //   ],
-    // ],
   },
   {
     name: "pathology",
@@ -605,20 +560,18 @@ export const skills: SkillType[] = [
     prerequisites: ["zoology", "botany"],
     x: 1,
     y: 1,
-    // preReqLines: [
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "lineToPreReq", skillName: "zoology" },
-    //   ],
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "line", dx: -100, dy: 0 },
-    //     { type: "curve", start: "right", end: "bottom" },
-    //     { type: "line", dx: 0, dy: 60 },
-    //     { type: "curve", start: "top", end: "left" },
-    //     { type: "lineToPreReq", skillName: "botany" },
-    //   ],
-    // ],
+    preReqLineStartPoint: 70,
+    preReqLines: [
+      [{ type: "endArrow", position: "left", skill: "exobiology" }],
+      [
+        { type: "line", dx: 160 },
+        { type: "line", dy: 5 },
+        { type: "curve", start: "top", end: "right" },
+        { type: "line", dx: 25 },
+        { type: "curve", start: "left", end: "bottom" },
+        { type: "endArrow", position: "top", skill: "surgery" },
+      ],
+    ],
   },
   {
     name: "pharmacology",
@@ -627,12 +580,6 @@ export const skills: SkillType[] = [
     prerequisites: ["chemistry"],
     x: 1,
     y: 7,
-    // preReqLines: [
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "lineToPreReq", skillName: "chemistry" },
-    //   ],
-    // ],
   },
   {
     name: "physics",
@@ -642,12 +589,6 @@ export const skills: SkillType[] = [
     prerequisites: ["mathematics"],
     x: 1,
     y: 10,
-    // preReqLines: [
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "lineToPreReq", skillName: "mathematics" },
-    //   ],
-    // ],
   },
   {
     name: "piloting",
@@ -657,12 +598,6 @@ export const skills: SkillType[] = [
     prerequisites: ["zero-g"],
     x: 1,
     y: 9,
-    // preReqLines: [
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "lineToPreReq", skillName: "zero-g" },
-    //   ],
-    // ],
   },
   {
     name: "psychology",
@@ -673,26 +608,7 @@ export const skills: SkillType[] = [
     y: 0,
     preReqLineStartPoint: 80,
     preReqLines: [
-      // [
-      //   { type: "endArrow", position: "bottom" },
-      //   { type: "curve", start: "top", end: "left" },
-      //   { type: "line", dx: -10, dy: 0 },
-      //   { type: "curve", start: "right", end: "bottom" },
-      //   { type: "line", dx: 0, dy: 4 },
-      //   { type: "line", dx: -82, dy: 0 },
-      //   { type: "curve", start: "right", end: "bottom" },
-      //   { type: "line", dx: 0, dy: 60 },
-      //   { type: "curve", start: "top", end: "left" },
-      //   { type: "lineToPreReq", skillName: "botany" },
-      // ],
-      // [
-      //   { type: "endArrow", position: "bottom" },
-      //   { type: "curve", start: "top", end: "left" },
-      //   { type: "line", dx: -10, dy: 0 },
-      //   { type: "curve", start: "right", end: "bottom" },
-      //   { type: "line", dx: 0, dy: 4 },
-      //   { type: "lineToPreReq", skillName: "zoology" },
-      // ],
+      [{ type: "endArrow", position: "left", skill: "sophontology" }],
     ],
   },
   {
@@ -703,46 +619,6 @@ export const skills: SkillType[] = [
     prerequisites: ["botany", "military training"],
     x: 1,
     y: 13,
-    // preReqLines: [
-    //   [
-    //     { type: "endArrow", position: "top" },
-    //     { type: "curve", start: "bottom", end: "left" },
-    //     { type: "line", dx: -27, dy: 0 },
-    //     { type: "skip", dx: -10, dy: 0 },
-    //     { type: "line", dx: -37, dy: 0 },
-    //     { type: "curve", start: "right", end: "top" },
-    //     { type: "skip", dx: 0, dy: -10 },
-    //     { type: "line", dx: 0, dy: -29 },
-    //     { type: "skip", dx: 0, dy: -10 },
-    //     { type: "line", dx: 0, dy: -30 },
-    //     { type: "skip", dx: 0, dy: -10 },
-    //     { type: "line", dx: 0, dy: -30 },
-    //     { type: "skip", dx: 0, dy: -10 },
-    //     { type: "line", dx: 0, dy: -30 },
-    //     { type: "skip", dx: 0, dy: -10 },
-    //     { type: "line", dx: 0, dy: -30 },
-    //     { type: "skip", dx: 0, dy: -10 },
-    //     { type: "line", dx: 0, dy: -30 },
-    //     { type: "skip", dx: 0, dy: -10 },
-    //     { type: "line", dx: 0, dy: -4 },
-    //     { type: "skip", dx: 0, dy: -10 },
-    //     { type: "line", dx: 0, dy: -16 },
-    //     { type: "skip", dx: 0, dy: -10 },
-    //     { type: "line", dx: 0, dy: -30 },
-    //     { type: "skip", dx: 0, dy: -10 },
-    //     { type: "line", dx: 0, dy: -25 },
-    //     { type: "curve", start: "bottom", end: "left" },
-    //     { type: "lineToPreReq", skillName: "botany" },
-    //   ],
-    //   [
-    //     { type: "endArrow", position: "bottom" },
-    //     { type: "curve", start: "top", end: "left" },
-    //     { type: "line", dx: -10, dy: 0 },
-    //     { type: "curve", start: "right", end: "bottom" },
-    //     { type: "line", dx: 0, dy: 4 },
-    //     { type: "lineToPreReq", skillName: "military training" },
-    //   ],
-    // ],
   },
   {
     name: "artificial intelligence",
@@ -818,12 +694,6 @@ export const skills: SkillType[] = [
     prerequisites: ["psychology"],
     x: 2,
     y: 0,
-    // preReqLines: [
-    //   [
-    //     { type: "endArrow", position: "left" },
-    //     { type: "lineToPreReq", skillName: "psychology" },
-    //   ],
-    // ],
   },
   {
     name: "surgery",

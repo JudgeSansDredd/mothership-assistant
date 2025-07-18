@@ -1,5 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import type { WritableDraft } from "immer";
 import {
+  CharacterClassName,
   CharacterType,
   ExpertSkillNameType,
   MasterSkillNameType,
@@ -11,9 +13,9 @@ import {
 } from "../../Utils/types";
 
 const initialState: CharacterType = {
-  name: "",
-  pronouns: "",
-  notes: "",
+  name: import.meta.env.VITE_ENVIRONMENT === "development" ? "Nathan" : "",
+  pronouns: "he/him",
+  notes: "32, overweight",
   stats: {
     strength: 10,
     speed: 10,
@@ -34,41 +36,62 @@ const characterSlice = createSlice({
   name: "character",
   initialState,
   reducers: {
-    setName: (state, action: PayloadAction<string>) => {
+    setName: (
+      state: WritableDraft<CharacterType>,
+      action: PayloadAction<string>
+    ) => {
       state.name = action.payload;
     },
-    setPronouns: (state, action: PayloadAction<string>) => {
+    setPronouns: (
+      state: WritableDraft<CharacterType>,
+      action: PayloadAction<string>
+    ) => {
       state.pronouns = action.payload;
     },
-    setNotes: (state, action: PayloadAction<string>) => {
+    setNotes: (
+      state: WritableDraft<CharacterType>,
+      action: PayloadAction<string>
+    ) => {
       state.notes = action.payload;
     },
     setStat: (
-      state,
+      state: WritableDraft<CharacterType>,
       action: PayloadAction<{ stat: StatType; value: number | null }>
     ) => {
       state.stats[action.payload.stat] = action.payload.value;
     },
-    setStats: (state, action: PayloadAction<StatArrayType>) => {
+    setStats: (
+      state: WritableDraft<CharacterType>,
+      action: PayloadAction<StatArrayType>
+    ) => {
       state.stats = action.payload;
     },
-    setStatModifierChosen: (state, action: PayloadAction<StatType | null>) => {
+    setStatModifierChosen: (
+      state: WritableDraft<CharacterType>,
+      action: PayloadAction<StatType | null>
+    ) => {
       state.statModifierChosen = action.payload;
     },
     setSave: (
-      state,
+      state: WritableDraft<CharacterType>,
       action: PayloadAction<{ save: SaveType; value: number | null }>
     ) => {
       state.saves[action.payload.save] = action.payload.value;
     },
-    setSaves: (state, action: PayloadAction<SaveArrayType>) => {
+    setSaves: (
+      state: WritableDraft<CharacterType>,
+      action: PayloadAction<SaveArrayType>
+    ) => {
       state.saves = action.payload;
     },
-    setCharacterClass: (state, action) => {
+    setCharacterClass: (
+      state: WritableDraft<CharacterType>,
+      action: PayloadAction<CharacterClassName | null>
+    ) => {
       state.characterClass = action.payload;
     },
     toggleSelectedSkill: (
-      state,
+      state: WritableDraft<CharacterType>,
       action: PayloadAction<
         TrainedSkillNameType | ExpertSkillNameType | MasterSkillNameType
       >

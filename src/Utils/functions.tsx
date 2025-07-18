@@ -167,14 +167,15 @@ export const useGetStats = () => {
       const characterClass = characterClasses.filter(
         (characterClass) => characterClass.name === selectedClass
       )[0];
-      const modifierValue =
-        characterClass.modifiers
-          .filter((mod) => {
-            return mod.stats && Object.keys(mod.stats).includes(statName);
-          })
-          .map((mod) => {
-            return mod.stats && mod.stats[statName];
-          })[0] || null;
+      const modifierValue = characterClass
+        ? characterClass.modifiers
+            .filter((mod) => {
+              return mod.stats && Object.keys(mod.stats).includes(statName);
+            })
+            .map((mod) => {
+              return mod.stats && mod.stats[statName];
+            })[0] || null
+        : null;
       const chosenModifierValue =
         statModifierChosen === statName
           ? characterClass.modifiers

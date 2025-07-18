@@ -1,4 +1,4 @@
-import { skills, skillXSpacing, skillYSpacing } from "../Utils/constants";
+import { skills } from "../Utils/constants";
 import { calculateSkillPosition } from "../Utils/functions";
 import { PreReqPathType } from "../Utils/types";
 import PreReqArrow from "./PreReqArrow";
@@ -59,23 +59,9 @@ export default function PreReqLine(props: PropType) {
         }
         return `a ${curveLength} ${curveLength} 0 0 ${isClockwise(start, end) ? 1 : 0} ${dx} ${dy}`;
       }
-      if (type === "lineToPreReq") {
-        const { skillName } = preReqLineSegment;
-        const preReqSkill = skills.find((skill) => skill.name === skillName);
-        if (!preReqSkill || preReqSkill.level === "master") return "";
-        const endX =
-          (preReqSkill.x ?? -10) * skillXSpacing +
-          50 +
-          (preReqSkill.preReqLineStartPoint ?? 0);
-        const endY = (preReqSkill.y ?? -10) * skillYSpacing + 60;
-        return `L ${endX} ${endY}`;
-      }
       return "";
     }),
   ].join(" ");
-  console.log("🚀 ~ PreReqLine ~ pathString:", pathString);
-
-  console.log(pathString);
 
   const arrows = props.preReqLine
     .filter((segment) => segment.type === "endArrow")

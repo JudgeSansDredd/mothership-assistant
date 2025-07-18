@@ -85,10 +85,6 @@ export type CurveSegmentType = (
   | CurveLeftStart
   | CurveRightStart
 ) & { type: "curve"; radius?: number };
-export type LineToPreReq = {
-  type: "lineToPreReq";
-  skillName: TrainedSkillNameType | ExpertSkillNameType;
-};
 export type EndArrowType = {
   type: "endArrow";
   position: "left" | "top" | "bottom";
@@ -98,7 +94,6 @@ export type PreReqPathSegmentType =
   | PathSkipType
   | LineSegmentType
   | CurveSegmentType
-  | LineToPreReq
   | EndArrowType;
 export type PreReqPathType = PreReqPathSegmentType[];
 export interface ExpertSkillType {
