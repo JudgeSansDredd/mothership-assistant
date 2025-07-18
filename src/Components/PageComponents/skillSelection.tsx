@@ -53,6 +53,7 @@ export default function SkillSelection() {
       if (skill.level !== "master" && skill.preReqLines) {
         const { xPosition, yPosition } = calculateSkillPosition(skill);
         const selected = selectedSkills.includes(skill.name);
+        const granted = getSkillIsGranted(skill.name, characterClass);
         return skill.preReqLines.map((preReqLine) => {
           return {
             preReqLine,
@@ -60,7 +61,7 @@ export default function SkillSelection() {
               x: xPosition + (skill.preReqLineStartPoint || 0),
               y: yPosition,
             },
-            highlighted: selected,
+            highlighted: selected || granted,
           };
         });
       }
